@@ -148,7 +148,7 @@ gulp.task('build:html', () => {
     .pipe(gulpif(['*.html', '!index.html'], generateDirectoryIndex()))
   );
 
-  streams.push(gulp.src(`app/views/${VIEWS_FILTER}/*.{css,gif,jpeg,jpg,png,svg,tff}`, { base: 'app/views' })
+  streams.push(gulp.src(`app/views/${VIEWS_FILTER}.{css,gif,jpeg,jpg,png,svg,tff}`, { base: 'app/views' })
     .pipe(gulp.dest('build')));
 
   const otherSrcs = [
@@ -167,7 +167,7 @@ gulp.task('build:html', () => {
 // build:images builds all the images into the build directory.   构建:映像将所有映像构建到构建目录中。
 gulp.task('build:images', () => {
   const srcs = [
-    'app/images/**/*',
+    'app/images',
     'app/favicon.ico',
   ];
 
