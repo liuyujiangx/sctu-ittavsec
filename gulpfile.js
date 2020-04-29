@@ -8,7 +8,7 @@ const babel = require('gulp-babel');
 const closureCompilerPackage = require('google-closure-compiler');
 const closureCompiler = closureCompilerPackage.gulp();
 const crisper = require('gulp-crisper');
-const gulpif = require('gulp-ifk');
+const gulpif = require('gulp-if');
 const htmlmin = require('gulp-htmlmin');
 const merge = require('merge-stream');
 const postcss = require('gulp-html-postcss');
@@ -480,7 +480,7 @@ const collectMetadata = () => {
       views[view.id] = view;
     }
 
-    const codelabFiles = glob.sync(`${CODELABS_DIR}/*/codelab.json`);
+    const codelabFiles = glob.sync(`${CODELABS_DIR}codelab.json`);
     for (let i = 0; i < codelabFiles.length; i++) {
       const codelab = parseCodelabMetadata(codelabFiles[i]);
       codelabs.push(codelab);
