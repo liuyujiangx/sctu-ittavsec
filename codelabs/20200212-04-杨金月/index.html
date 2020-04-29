@@ -1,0 +1,198 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>基于 TensorFlow.js 的迁移学习图像分类器</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="基于 TensorFlow.js 的迁移学习图像分类器"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="加载 TensorFlow.js 和 MobileNet 模型" duration="0">
+        <p>在编辑器中创建一个HTML文件，命名为index.html,添加以下内容。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&#34;utf-8&#34; /&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;!--加载最新版本的TensorFlow.js --&gt;
+        &lt;script src=&#34;https://unpkg.com/@tensorflow/tfjs&#34;&gt;&lt;/script&gt;
+        &lt;script src=&#34;https://unpkg.com/@tensorflow-models/mobilenet&#34;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;div id=&#34;console&gt;&lt;/div&gt;
+    &lt;!--添加一个用于测试的图像--&gt;
+    &lt;img id=&#34;img&#34; crossOrigin src=&#34;https://i.imgur.com/JlUvsxa.jpg&#34; width=227 height=227/&gt;
+    &lt;!-- 加载 index.js 在内容页之后--&gt;
+    &lt;script src=&#34;js/index.js&#34;&gt;&lt;/script&gt; 
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>注意：在img里请使用有用的图片地址</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="在浏览器中设置 MobileNet 用于预测" duration="0">
+        <p>在代码编辑器中打开/创建 index.js 文件，添加以下代码：</p>
+<pre><code>let net;
+async function app(){
+  console.log(&#39;Loading mobilenet..&#39;);
+// 加载模型
+  net = await mobilenet.load();
+  console.log(&#39;Sucessfully loaded model&#39;);
+// 通过模型预测图像
+  const imgEl = document.getElementById(&#39;img&#39;);
+  const result = await net.classify(imgEl);
+  console.log(result);
+}
+app();
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="在浏览器中测试 MobileNet 的预测" duration="0">
+        <p>运行index.html文件，调出JavaScript控制台，你将看见一张狗的照片，而这就是MobileNet 的预测结果。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="通过网络摄像头图像在浏览器中执行 MobileNet 预测" duration="0">
+        <p>接下来，我们来设置网络摄像头来预测由网络摄像头传输的图像。<br><br>现在，让我们让它更具交互性和实时性。让我们设置网络摄像头来预测由网络摄像头传输的图像。<br><br>首先要设置网络摄像头的视频元素。打开 index.html 文件，在  部分中添加如下行，并删除我们用于加载狗图像的  标签。</p>
+<pre><code>&lt;video autoplay playsinline muted id=&#34;webcam&#34; width=&#34;224&#34; height=&#34;224&#34;&gt;&lt;/video&gt; 
+</code></pre>
+<p>打开 index.js 文件并将 webcamElement 添加到文件的最顶部。</p>
+<pre><code>const webcamElement = document.getElementById(&#39;webcam&#39;);
+</code></pre>
+<p>在同一个 index.js 文件中，在调用 &#34;app()&#34; 函数之前添加网络摄像头的设置函数：</p>
+<pre><code>async function setupWebcam() {  
+    return new Promise((resolve, reject) =&gt; {    
+        const navigatorAny = navigator;
+        navigator.getUserMedia = navigator.getUserMedia ||
+            navigatorAny.webkitGetUserMedia || navigatorAny.mozGetUserMedia ||
+            navigatorAny.msGetUserMedia;    
+        if (navigator.getUserMedia) {
+            navigator.getUserMedia({video: true},
+                stream=&gt; {
+                    webcamElement.srcObject = stream;
+                    webcamElement.addEventListener(&#39;loadeddata&#39;,  () =&gt; resolve(), false);        
+                },
+                error=&gt; reject());    
+        }else{
+            reject();
+        }
+    });
+}
+</code></pre>
+<p>在之前添加的 app() 函数中，你可以删除通过图像预测的部分，用一个无限循环，通过网络摄像头预测代替。</p>
+<pre><code>async function app(){
+    console.log(&#39;Loading mobilenet..&#39;);
+// 加载模型
+    net = await mobilenet.load();
+    console.log(&#39;Sucessfully loaded model&#39;);
+    await setupWebcam();
+    while(true){
+        const result = await net.classify(webcamElement);
+        document.getElementById(&#39;console&#39;).innerText =`
+            prediction: ${result[0].className}\n
+            probability: ${result[0].probability}
+        `;
+
+    // 给自己一些喘息的空间
+    // 等待下一个动画帧开始
+    await tf.nextFrame();
+  }
+}
+</code></pre>
+<p>如果你在网页中打开控制台，现在你应该会看到 MobileNet 的预测和网络摄像头收集到的每一帧图像。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="在 MobileNet 预测的基础上添加一个自定义的分类器" duration="0">
+        <p>现在，让我们把它变得更加实用。我们使用网络摄像头动态创建一个自定义的 3 对象的分类器。我们将通过 MobileNet 进行分类，但这次我们将使用特定网络摄像头图像在模型的内部表示（激活值）来进行分类。<br><br>我们将使用一个叫做 &#34;K-Nearest Neighbors Classifier&#34; 的模块，他将有效的让我们把摄像头采集的图像（实际上是 MobileNet 中的激活值）分成不同的类别，当用户要求做出预测时，我们只需选择拥有与待预测图像最相似的激活值的类即可。<br><br>在 index.html 的  标签的末尾添加 KNN 分类器的导入（你仍然需要 MobileNet，所以不要删除它的导入）：</p>
+<pre><code>&lt;script src=&#34;https://unpkg.com/@tensorflow-models/knn-classifier&#34;&gt;&lt;/script&gt;
+</code></pre>
+<p>在 index.html 视频部分下面添加三个按钮。这些按钮将用于向模型添加训练图像。</p>
+<pre><code>    &lt;button id=&#34;class-a&#34;&gt;add a&lt;/button&gt;
+    &lt;button id=&#34;class-b&#34;&gt;add a&lt;/button&gt;
+    &lt;button id=&#34;class-c&#34;&gt;add a&lt;/button&gt;
+</code></pre>
+<p>在 index.js 的顶部，创建一个分类器</p>
+<pre><code>const classifier = knnClassifier.create();
+</code></pre>
+<p>更新 app 函数;</p>
+<pre><code>async function app(){
+    console.log(&#39;Loading mobilenet..&#39;);
+    //losd the model
+    net = await mobilenet.load();
+    console.log(&#39;Sucessfully loaded model&#39;);
+    
+    await setupWebcam();
+    //从网络摄像头中读取图像并将其与特定类关联
+    const addExample classId=&gt;{
+        // 获取 MobileNet 中间的 &#39;conv_preds&#39; 的激活值
+        // 并将其传递给 KNN 分类器
+        const activation = net.infer(webcamElement, &#39;conv_preds&#39;);
+        // 将中间激活值传递给分类器
+        classifier.addExample(activation, classId);     
+    };
+     
+    // 单击该按钮是，为该类添加一个实例
+    document.getElementById(&#34;class-a&#34;).addEventListener(&#39;click&#39;,()=&gt;addExample(0));
+    document.getElementById(&#34;class-b&#34;).addEventListener(&#39;click&#39;,()=&gt;addExample(1));
+    document.getElementById(&#34;class-c&#34;).addEventListener(&#39;click&#39;,()=&gt;addExample(2));
+    while(true){
+        if(classifier.getNumClasses() &gt; 0) {      
+            // 获取 MobileNet 在网络摄像头中图像上的激活值
+            const activation = net.infer(webcamElement, &#39;conv_preds&#39;);           
+            // 从分类器模块上获取最可能的类
+            const result = await classifier.predictClass(activation);
+            const classes = [&#39;A&#39;, &#39;B&#39;, &#39;C&#39;];      
+            document.getElementById(&#39;console&#39;).innerText = `       
+                prediction: ${classes[result.classIndex]}\n        
+                probability: ${result.confidences[result.classIndex]}      
+            `;
+    }       
+    await tf.nextFrame();
+  }
+}
+</code></pre>
+<p>当你加载 index.html 页面时，你可以使用常用对象或面部表情/手势为这三个类中的每一个类捕获图像。每次单击其中一个 &#34;Add&#34; 按钮，就会向该类添加一个图像作为训练实例。当你这样做的时候，模型会继续预测网络摄像头的图像，并实时显示结果。<br><br>注意：在这里可能会报错，出现：Uncaught (in promise) TypeError: Failed to fetch。<br><br>这个错误提示是网络连接超时的意思，解决办法如下：<br><br>清除浏览器历史记录和缓存。<br><br>Google Chrome浏览器清除历史记录和缓存：转到&#34;自定义和控制&#34;（Chrome浏览器右上角） – &gt;然后单击&#34;设置&#34; – &gt;单击下面的&#34;显示高级设置&#34;按钮 – &gt;然后到&#34;隐私&#34;部分 – &gt;点击&#34;清除浏览数据&#34;按钮 – &gt;检查新弹出窗口中的所有框 – &gt;然后单击&#34;清除浏览数据&#34;按钮。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="结语" duration="0">
+        <p>我们在这里主要是加载并运行一个名为 MobileNet 的流行的预训练模型从而实现在浏览器中的图像分类问题。使用&#34;迁移学习&#34;技术，这项技术将使用预训练好的 MobileNet 模型为你的应用定制以及引导训练。在学习和实现例子的过程中，会遇到许多的问题，而我们则需要去静下心解决这些问题，学会在我们写的代码中找问题。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

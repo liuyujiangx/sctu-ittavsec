@@ -1,0 +1,357 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>CSS的动画实现</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="CSS的动画实现"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="1、方法" duration="0">
+        <p>1）定义动画：用keyfames定义动画（类似定义类选择器）。</p>
+<pre><code>@keyframes 动画名称{
+                0%{
+                    width:0px;
+                }
+                100%{
+                    width:1200px;
+                }
+         }
+</code></pre>
+<p>2）使用（调用）动画<br>在此处我们设计一个盒子，当我们打开网页时它可以从左边跑到右边。</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;en&#34;&gt;
+&lt;head&gt;
+    &lt;meta charset=&#34;UTF-8&#34;&gt;
+    &lt;title&gt;&lt;/title&gt;
+    &lt;style&gt;
+        /* 1. 定义动画 */
+        @keyframes moving{
+            /* 开始状态（从0px处开始滑动）*/
+            0%{
+                transform: translateX(0px);
+            }
+            /* 结束状态（滑动到1200px处结束）*/
+            100%{
+                transform: translateX(1200px);
+            }
+        }
+        .i{
+            width:200px;
+            height: 200px;
+            background-color: pink;
+            /* 2.调用动画 */
+            /* 动画名称（上方@keyframes 定义的动画名称）*/
+            animation-name: moving;
+            /* 持续时间 （动画持续6秒）*/
+            animation-duration: 6s;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    /*调用div样式*/
+     &lt;div class=&#34;i&#34;&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>实现的效果：<br><img src="img/8db43264f467d35c.png"><br><br>讲解:<br><br>0%是动画的开始，100%是动画的完成。这样的规则就是动画序列。<br><br>在@keyframes中规定某项CSS样式，就能创建由当前改为新样式的动画效果。<br><br>动画是使元素从一种样式逐渐变化为另一种样式的效果。您可以改变任意多的样式任意多的次数。<br><br>我们除了用百分比来规定变化发生的时间，还可用关键词&#34;from&#34;和&#34;to&#34;，等同于0%和100%来实现。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="2、常见属性animation" duration="0">
+        <p>animation比较类似于 flash 中的逐帧动画，逐帧动画就像电影的播放一样，表现非常细腻并且有非常大的灵活性。然而transition只是指定了开始和结束态，整个动画的过程也是由特定的函数控制。学习过 flash 的同学知道，这种逐帧动画是由关键帧组成，很多个关键帧连续的播放就组成了动画，在 CSS3中是由属性keyframes来完成逐帧动画的。<br><br>@keyframes:</p>
+<pre><code>@keyframes animationName {
+    from {
+        properties: value;
+    }
+    percentage {
+        properties: value;
+    }
+    to {
+        properties: value;
+    }
+}
+//or
+@keyframes animationName {
+    0% {
+        properties: value;
+    }
+    percentage {
+        properties: value;
+    }
+    100% {
+        properties: value;
+    }
+}
+</code></pre>
+<p>animationName：动画名称，开发人员自己命名；<br><br>percentage：为百分比值，可以添加多个百分比值；<br><br>properties：样式属性名称，例如：color、left、width等等。<br><br>animation-name：<br>用来设置动画的名称，可以同时赋值多个动画名称，用,隔开;</p>
+<pre><code>animation-name: none | IDENT[,none | IDENT]*;
+</code></pre>
+<p>animation-duration:<br><br>用来设置动画的持续时间，单位为s，默认值为0;</p>
+<pre><code>animation-duration: &lt;time&gt;[,&lt;time&gt;]*;
+</code></pre>
+<p>animation-delay:<br><br>设置动画的开始时间，单位是s或者ms，默认值为0;</p>
+<pre><code>animation-delay: &lt;time&gt;[,&lt;time&gt;]*;
+</code></pre>
+<p>animation-iteration-count:<br><br>置动画循环的次数，默认为1,infinite为无限次数的循环;</p>
+<pre><code></code></pre>
+<p>animation-direction:<br><br>置动画播放的方向，默认值为normal表示向前播放，alternate代表动画播放在第偶数次向前播放，第奇数次向反方向播放;</p>
+<pre><code>animation-direction: normal | alternate [, normal | alternate]*;
+</code></pre>
+<p>animation-play-state:<br><br>控制动画的播放状态：running代表播放，而paused代表停止播放，running为默认值：</p>
+<pre><code>animation-play-state:running | paused[,running | paused]*;
+</code></pre>
+<p>animation:<br><br>它是animation-name、animation-duration、animation-timing-function、animation-delay、animation-iteration-count、animation-direction的简写：</p>
+<pre><code>animation:[&lt;animation-name&gt; || &lt;animation-duration&gt; || &lt;animation-timing-function&gt; || &lt;animation-delay&gt; || &lt;animation-iteration-count&gt; || &lt;animation-direction&gt;] [, [&lt;animation-name&gt; || &lt;animation-duration&gt; || &lt;animation-timing-function&gt; || &lt;animation-delay&gt; || &lt;animation-iteration-count&gt; || &lt;animation-direction&gt;] ]*;
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="3、常见属性transform" duration="0">
+        <p>transform可以用来设置元素的形状改变，主要有以下几种变形：rotate（旋转）、scale（缩放）、skew（扭曲）、translate（移动）和matrix（矩阵变形）；</p>
+<pre><code>transform ： none | &lt;transform-function&gt; [ &lt;transform-function&gt; ]*
+</code></pre>
+<p>none表示不做变换；表示一个或多个变化函数，变化函数由函数名和参数组成，参数包含在()里面，用空格分开；</p>
+<pre><code>transform ： rotate(30deg) scale(2,3);
+</code></pre>
+<p>transform-origin 基点：<br><br>所有的变形都是基于基点，基点默认为元素的中心点。用法：transform-origin: (x, y)，其中 x 和 y 的值可以是百分比、rem 或者是 px 等等，也可以用表示位置的单词来表示例如：x 可以用left、center、right；y 可以用top、center、bottom。</p>
+<pre><code>transform-origin: (left, bottom);
+</code></pre>
+<p>rotate 旋转：<br><br>用法：rotate()；表示通过指定的角度对元素进行旋转变形，如果是正数则顺时针旋转，如果是负数则逆时针旋转；</p>
+<pre><code>.transform-rotate {
+    transform: rotate(30deg);
+}
+</code></pre>
+<p><img src="img/8d6e845ef091fa1d.png"><br>scale 缩放:<br><br>它有三种用法：scale([, ])、scaleX()和scaleY()；分别代表水平和垂直方向同时缩放、水平方向的缩放以及垂直方向的缩放，入参代表水平或者垂直方向的缩放比例。缩放比例如果大于1则放大，反之则缩小，如果等于1代表原始大小。</p>
+<pre><code>.transform-scale {
+    transform: scale(2,1.5);
+}
+
+.transform-scaleX {
+    transform: scaleX(2);
+}
+
+.transform-scaleY {
+    transform: scaleY(1.5);
+}
+</code></pre>
+<p><img src="img/ea411157b44a83aa.png"><br>translate 移动:<br><br>移动也分三种情况：translate([, ])、translateX()和translateY()；分别代表水平和垂直的移动、水平方向的移动以及垂直方向同时移动，移动单位是 CSS 中的长度单位：px、rem等;</p>
+<pre><code>.transform-translate {
+    transform: translate(400px, 20px);
+}
+
+.transform-translateX {
+    transform: translateX(300px);
+}
+
+.transform-translateY {
+    transform: translateY(20px);
+}
+</code></pre>
+<p><img src="img/1439053776fe974b.png"><br>skew 扭曲:<br><br>扭曲同样也有三种情况，skew([, ])、skewX()和skewY()；同样也是水平和垂直方向同时扭曲、水平方向的扭曲以及垂直方向的扭曲，单位为角度。</p>
+<pre><code>.transform-skew {
+    transform: skew(30deg, 10deg);
+}
+
+.transform-skewX {
+    transform: skewX(30deg);
+}
+
+.transform-skewY {
+    transform: skewY(10deg);
+}
+</code></pre>
+<p><img src="img/9393c65acfffe14a.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="4、常见属性transition" duration="0">
+        <p>transition是用来设置样式的属性值是如何从从一种状态变平滑过渡到另外一种状态，它有四个属性：<br>transition-property（变换的属性，即那种形式的变换：大小、位置、扭曲等）；<br><br>transition-duration（变换延续的时间）；<br><br>transition-timing-function（变换的速率）;<br><br>transition-delay（变换的延时）;</p>
+<pre><code>transition ： [&lt;&#39;transition-property&#39;&gt; || &lt;&#39;transition-duration&#39;&gt; || &lt;&#39;transition-timing-function&#39;&gt; || &lt;&#39;transition-delay&#39;&gt; [, [&lt;&#39;transition-property&#39;&gt; || &lt;&#39;transition-duration&#39;&gt; || &lt;&#39;transition-timing-function&#39;&gt; || &lt;&#39;transition-delay&#39;&gt;]]*;
+</code></pre>
+<p>transition-property:<br><br>它是用来设置哪些属性的改变会有这种平滑过渡的效果，主要有以下值:<br>none；all；元素属性名：color；length；visibility；</p>
+<pre><code>}
+</code></pre>
+<p>transition-duration:<br>设置转换过程的持续时间，单位是s或者ms，默认值为0；</p>
+<pre><code>transition-duration ： &lt;time&gt; [, &lt;time&gt;]* ;
+</code></pre>
+<p>transition-timing-function:<br>它是来设置过渡效果的速率，它有6种形式的速率：<br><br>ease：逐渐变慢（默认），等同于贝塞尔曲线(0.25, 0.1, 0.25, 1.0)；<br><br>linear：匀速，等同于贝塞尔曲线(0.0, 0.0, 1.0, 1.0)；<br><br>ease-in：加速，等同于贝塞尔曲线(0.42, 0, 1.0, 1.0)；<br><br>ease-out：减速，等同于贝塞尔曲线(0, 0, 0.58, 1.0)；<br><br>ease-in-out：先加速后减速，等同于贝塞尔曲线(0.42, 0, 0.58, 1.0)；<br><br>cubic-bezier：自定义贝塞尔曲线。</p>
+<pre><code>transition-timing-function ： ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(&lt;number&gt;, &lt;number&gt;, &lt;number&gt;, &lt;number&gt;) [, ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier(&lt;number&gt;, &lt;number&gt;, &lt;number&gt;, &lt;number&gt;)]*;
+</code></pre>
+<p>贝塞尔曲线:<br><br>transition-delay:<br><br>设置过渡动画开始执行的时间，单位是s或者ms，默认值为0；</p>
+<pre><code>transition-delay ： &lt;time&gt; [, &lt;time&gt;]*;
+</code></pre>
+<p>transition<br><br>它是transition-property、transition-duration、transition-timing-function、transition-delay的简写：</p>
+<pre><code>transition ：&lt;property&gt; &lt;duration&gt; &lt;timing function&gt; &lt;delay&gt;;
+}
+</code></pre>
+<p>animation:<br><br>animation比较类似于 flash 中的逐帧动画，逐帧动画就像电影的播放一样，表现非常细腻并且有非常大的灵活性。然而transition只是指定了开始和结束态，整个动画的过程也是由特定的函数控制。学习过 flash 的同学知道，这种逐帧动画是由关键帧组成，很多个关键帧连续的播放就组成了动画，在 CSS3 中是由属性keyframes来完成逐帧动画的;</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="示例1：" duration="0">
+        <p>代码：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&#34;utf-8&#34; /&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;style&gt;
+            #mymoving {
+                width:300px;
+                height:200px;
+                background:red;
+                animation:mymove 20s infinite;
+                /*Safari 和 Chrome:*/
+                -webkit-animation:mymove 5s infinite;
+            }
+            @keyframes mymove{
+                from {background-color:red;}
+                to {background-color:blue;}
+            }
+
+            /*Safari 和 Chrome:*/
+            @-webkit-keyframes mymove{
+                from {background-color:red;}
+                to {background-color:blue;}
+            }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div id=&#34;mymoving&#34;&gt;&lt;/div&gt;       
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>效果：<br> <img src="img/bdb7873ad10a6f1c.png"><br>背景颜色逐渐地从红色变化到蓝色。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="示例2" duration="0">
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset=&#34;utf-8&#34;&gt; 
+    &lt;title&gt;&lt;/title&gt; 
+&lt;style&gt; 
+    div{
+        width:100px;
+        height:100px;
+        background:paleturquoise;
+        position:relative;
+        animation:myfirst 5s;
+    }
+
+    @keyframes myfirst{
+        0%   {background:pink; left:0px; top:0px;}
+        25%  {background:lightpink; left:200px; top:0px;}
+        50%  {background:hotpink; left:200px; top:200px;}
+        75%  {background:deeppink; left:0px; top:200px;}
+        100% {background:lightcoral; left:0px; top:0px;}
+    }
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>效果：<br><img src="img/a3a205b61b7b7f58.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="示例3" duration="0">
+        <p>代码：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&#34;UTF-8&#34;&gt;
+        &lt;title&gt;&lt;/title&gt;
+        &lt;style type=&#34;text/css&#34;&gt;
+            body {
+                background-color:black;
+            }
+            .circle1 {
+                width:100px;
+                height:100px;
+                border-radius:100px;
+                position:absolute;
+                z-index:2;
+                left:140px;
+                -webkit-animation:myfirst1 5s linear infinite;
+            }
+            @-webkit-keyframes myfirst1 {
+                0% {
+                    transform:rotate(0deg);
+                    box-shadow:0px 0px 10px #fff;
+                }
+                50% {
+                    transform:rotate(180deg);
+                    box-shadow:0px 0px 45px #fff;
+                }
+                100% {
+                    transform:rotate(360deg);
+                    box-shadow:0px 0px 10px #fff;
+                }
+            }
+            .circle2 {
+                width:10px;
+                height:10px;
+                border:4px solid #ddd;
+                border-radius:20px; 
+                left:45px;
+                top:5px;
+                position:absolute;
+                z-index:2;
+                overflow:hidden;
+                background-color:#ddd;
+                box-shadow:0px 0px 5px #fff;
+            }
+        &lt;/style&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;div class=&#34;circle1&#34;&gt;
+            &lt;div class=&#34;circle2&#34;&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;script&gt;&lt;/script&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p>效果：<br><img src="img/3bb0bd8c2515e8a9.png"></p>
+<p>参考：<br>[1]《CSS3 动画》一修<br>https://www.jianshu.com/p/15f2adfbdad0<br>[2]《CSS3 动画》菜鸟教程<br>https://www.runoob.com/css3/css3-animations.html<br>[3]《CSS3 动画》w3cschool<br>https://www.w3cschool.cn/cssref/css-animatable.html</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

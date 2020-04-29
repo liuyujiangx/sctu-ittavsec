@@ -1,0 +1,94 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>文件上传</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="文件上传"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="问题描述" duration="0">
+        <p>如何在小程序中实现包括jpg、png、gif等形式的文件上传？</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="效果图" duration="0">
+        <p><img src="img/4497702cd32dd03c.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="解决步骤" duration="0">
+        <h2>引入组件</h2>
+<p>在需要上传文件的页面的json中引入组件库中的组件。</p>
+<pre><code>{
+  &#34;usingComponents&#34;: {
+    &#34;van-uploader&#34;: &#34;/dist/uploader/index&#34;
+    },
+}
+
+</code></pre>
+<h2>编写wxml中的代码</h2>
+<p>引入uploader组件实现上传，以及一个button组件实现点击按钮。</p>
+<pre><code>&lt;view class=&#34;v1&#34;&gt;
+&lt;van-uploader class=&#34;change&#34;&gt;
+&lt;van-button icon=&#34;photo&#34; type=&#34;primary&#34;&gt;上传图片&lt;/van-button&gt;
+&lt;/van-uploader&gt;
+&lt;text&gt;点击上传文件&lt;/text&gt;
+&lt;/view&gt;
+
+</code></pre>
+<h2>js配置</h2>
+<p>如果要实现文件预览，则还需对js进行配置。</p>
+<pre><code>Page({
+  data: {
+    fileList: [
+      { url: &#39;https://img.yzcdn.cn/vant/leaf.jpg&#39;, name: &#39;图片1&#39; },
+      {
+        url: &#39;http://iph.href.lu/60x60?text=default&#39;,
+        name: &#39;图片2&#39;,
+        isImage: true
+      }
+    ]
+  }
+});
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>此种方法的文件上传目前包括的格式有jpg、png、gif几类图片格式，且无法实际应用中实现对图片的更改，但我们平时使用时上传文件通常存更多形式，还有其他更为全面和复杂的实现方法需要学习。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

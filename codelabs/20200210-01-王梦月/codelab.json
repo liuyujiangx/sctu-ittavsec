@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "source": "md文件/20200210-01-王梦月.md",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-02-11T14:59:44+08:00",
+  "id": "20200210-01-王梦月",
+  "duration": 35,
+  "title": "走进微信小程序",
+  "summary": "demo",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "wechat"
+  ],
+  "tags": [
+    "sctu-wechat"
+  ],
+  "feedback": "http://www.sctu.edu.cn",
+  "url": "20200210-01-王梦月"
+}

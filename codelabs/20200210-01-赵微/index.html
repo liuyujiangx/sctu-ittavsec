@@ -1,0 +1,211 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>登录界面的框架搭建</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="登录界面的框架搭建"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="案例介绍" duration="0">
+        <p>当新用户登录一个APP时，输入手机号获取验证码的登录方式是比较快捷的。那么如何利用微信小程序制作一个常见的手机接收验证码的登录界面呢？</p>
+<h2>效果图</h2>
+<p><img src="img/f2481d658b7fd875.PNG"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="问题分析" duration="0">
+        <p>一个简洁的登录界面需要的有输入框、按钮和提示字。<br>首先构建登录所需的输入框和按钮。<br>在wxml搭建框架，在wxss美化界面。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="全部代码" duration="0">
+        <pre><code>&lt;!--login.wxml--&gt;
+&lt;view class=&#34;container&#34;&gt;
+&lt;text&gt;欢迎来到一日三餐&lt;/text&gt;
+&lt;input type=&#34;number&#34; bindblur=&#34;getPhone&#34; placeholder=&#34;请输入手机号&#34; class=&#34;phone_number&#34;&gt;&lt;/input&gt;
+&lt;view class=&#34;code&#34;&gt;
+&lt;input type=&#34;number&#34; bindblur=&#34;getCode&#34; placeholder=&#34;请输入验证码&#34; class=&#34;code_number&#34;&gt;&lt;/input&gt;
+&lt;button class=&#34;btn_code&#34;&gt;获取验证码&lt;/button&gt;
+&lt;/view&gt;
+&lt;view&gt;
+&lt;button bindtap=&#34;login&#34; class=&#34;btn_login&#34;&gt;登录&lt;/button&gt;
+&lt;/view&gt;
+
+&lt;/view&gt;
+
+
+
+
+
+
+
+
+
+&lt;!--login.wxss--&gt;
+.container{
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 30rpx;
+}
+
+text{
+  font-size: 40rpx;
+  display: flex;
+  justify-content: center;
+}
+
+input{
+  border: 2rpx solid #FFC125;
+  height: 90rpx;
+  border-radius: 12rpx;
+padding-left: 16rpx;
+}
+
+.phone_number{
+  margin: 16rpx 0;
+}
+
+.code{
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 16rpx;
+  width: 100%;
+}
+
+.btn_code{
+background-color:  #FFC125;
+color: white;
+font-size: 32rpx;
+}
+
+.code_number{
+  flex: 1;
+}
+
+.btn_login{
+  background-color: #A2CD5A;
+  color: white;
+  font-size: 30rpx;
+}
+
+
+
+
+
+
+
+
+
+// pages/login/login.js
+Component({
+  /**
+   * 组件的属性列表
+   */
+  properties: {
+
+  },
+
+  /**
+   * 组件的初始数据
+   */
+  data: {
+phone_number:&#39;&#39;,
+code:&#39;&#39;
+  },
+
+  /**
+   * 组件的方法列表
+   */
+  methods: {
+    getPhone:function(e){
+      this.setData({
+        phone_number:e.detail.value
+        
+      })
+      if(this.data.phone_number.length != 11 ){
+      wx.showToast({
+        title: &#39;手机号输入错误&#39;,
+      })
+      return;
+      }  
+      console.log(this.data.phone_number)
+      },
+      getCode:function(e){
+        this.setData({
+          code:e.detail.value
+        })
+        console.log(this.data.code)
+      },
+      login:function(){
+        wx.request({
+          url: &#39;http://www.hengyishun.cn/login/login&#39;,
+          data:({
+            phone:this.data.phone_number,
+            code:this.data.code
+          })
+          ,
+          success(res){
+            console.log(res.data);
+          }
+        })
+      }
+  }
+})
+
+
+
+
+
+
+
+// pages/login/login.json
+{
+  &#34;component&#34;: true,
+  &#34;usingComponents&#34;: {}
+}
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="代码释疑" duration="0">
+        <p>上下输入框太近：margin: 16rpx 0;</p>
+<p>输入框中的提示字太靠左：padding-left: 16rpx;</p>
+<p>使输入框延长直至占满与按钮间的距离：flex: 1;</p>
+<p>另外需要注意的是，text不是类名称，在wxss中前面不用加点。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

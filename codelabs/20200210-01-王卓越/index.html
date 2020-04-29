@@ -1,0 +1,88 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>小程序利用button实现控制条件标签的变量</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="小程序利用button实现控制条件标签的变量"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="描述" duration="0">
+        <p>Duration :3:00<br>在小程序中如何利用button按钮来实现控制条件标签的变量呢？这也许是许多小伙伴们的问题，今天我就来简单的给大家演示一遍。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="演示步骤" duration="0">
+        <p>Duration :10:00</p>
+<h2>第一步</h2>
+<p>首先打开微信公众平台，将一个primary的button按钮代码复制到开发平台上，再为其绑定一个名为&#34;bindfirst&#34;的事件，（当然这个bindfirst的事件需要在js中去定义，下面的步骤我将会去定义）代码如下；</p>
+<pre><code>&lt;view&gt;
+  &lt;button type=&#34;primary&#34; bindtap=&#34;bindfirst&#34;&gt; 点一下就改变 &lt;/button&gt;
+&lt;/view&gt;
+</code></pre>
+<h2>第二步</h2>
+<p>我们创建一个text用来if条件标签来控制，同时再js中定义为一个空的量，<br>我们将if条件的定义一个judge变量给其赋值为true（if 条件标签如果为true，则显示text，如果为false则不显示text），再在button所绑定的事件中去改变text的值即可。代码如下；</p>
+<h3>wxml代码</h3>
+<pre><code>&lt;view&gt;
+  &lt;button type=&#34;primary&#34; bindtap=&#34;bindfirst&#34;&gt; 点一下就改变 &lt;/button&gt;
+  &lt;text wx:if=&#34;&#123;&#123;judge}}&#34;&gt;&#123;&#123;text}}&lt;/text&gt;
+&lt;/view&gt;
+</code></pre>
+<h3>js代码</h3>
+<pre><code>Page({
+  data: {
+    text:[],
+    judge:true,
+  },
+  onLoad: function () {
+   
+ 
+  },
+  bindfirst:function(){
+    var s=this.data.judge
+    this.setData({text:&#34;你点击了我&#34;,judge:!s})
+  }
+})
+</code></pre>
+<h2>第三步</h2>
+<p>当我们点击一次时，会出现text，当点击第二次时就会关闭text，因为bindfirst中利用改变judge的值为true和false来达到改变text。</p>
+<h3>效果图</h3>
+<p><img src="img/56ca094fdd78c29f.png"><img src="img/b27ecc96ab47959f.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="小结" duration="0">
+        <p>Duration :5:00<br>当我们点击button时就会触发绑定的bindfirst事件，而bindfirst事件中是text的变量，而data中所定义的text是一个空值，当我们点击时就会改变text中的量，从而达到简单的if条件标签的用button来控制。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

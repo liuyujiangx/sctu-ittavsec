@@ -1,0 +1,93 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>gulp入门</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="gulp入门"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="案例介绍" duration="5">
+        <p>gulp入门类教程，官方主页<a href="https://gulpjs.com/" target="_blank">gulpjs</a>。</p>
+<h2>你需要准备什么</h2>
+<ul>
+<li>安装好Node环境，<a href="https://nodejs.org/en/download/" target="_blank">Node下载地址</a>。</li>
+<li>安装gulp-clid<br>npm install gulp-cli -g</li>
+<li>打开系统自带命令行窗口<br><br></li>
+</ul>
+<h2>你将学到什么</h2>
+<ul>
+<li>什么是gulp;</li>
+<li>简单任务定义；</li>
+<li>组合任务定义；</li>
+<li>常见模块和插件；</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="工作目录介绍" duration="5">
+        <pre><code>gulp-demo
+|--- gulp-1
+|  |--- gulpfile.js
+|--- gulp-2
+|  |--- gulpfile.js
+|--- gulp-3
+|  |--- gulpfile.js
+</code></pre>
+<p>其中gulp-demo为当前的工作目录，gulp-*为每一个示例项目，每个示例项目下都有一个gulpfile.js文件。</p>
+<p>打开系统命令行窗口，创建工作目录，并切换到该目录下。</p>
+<pre><code>mkdir gulp-demo 
+cd gulp-demo
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="hello, world" duration="0">
+        <p>创建第一个案例gulp-1，并切换到该目录下。</p>
+<pre><code>mkdir gulp-1
+cd gulp-1
+npm install gulp -D # 在当前示例下安装gulp
+</code></pre>
+<p>创建名为gulpfile.js的文件，并写入代码：</p>
+<pre><code>function task(){
+    console.log(&#39;hello,world&#39;);
+}
+
+exports.task = task
+</code></pre>
+<p>关闭保存文件，命令行下执行：</p>
+<pre><code>gulp task
+</code></pre>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

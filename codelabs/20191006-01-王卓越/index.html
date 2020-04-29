@@ -1,0 +1,79 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>有关python中的循环终止所涉及的相关问题</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="有关python中的循环终止所涉及的相关问题"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="循环中所涉及的相关元素" duration="0">
+        <h2>While循环</h2>
+<p>有关while循环主要格式为（while+判断语句：）如果符合判断语句则执行在while循环下的条件语句。</p>
+<pre><code>count=0
+while count&lt;9:
+    print(&#39;the count is:&#39;,count)
+    count+=1
+print(&#39;good bye!&#39;)
+</code></pre>
+<h2>for循环</h2>
+<p>在for循环中，我们可以使我们所设的未知数在一个范围内依次取得这个范围的任意数，或者随机取得这个范围内的数。for循环对于未知数的取值有积极<br>的作用。在下图中我们可以利用for循环语句来依次输出python的各个字母。</p>
+<pre><code>for letter in &#34;python&#34;:
+    print(&#39;当前字母：&#39;,letter)   
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="循环中的终止元素" duration="0">
+        <h2>break元素</h2>
+<p>break元素是使用以及涉及最广的终止元素，python中的break语句可以直接终止while以及for循环，使其停止循环。例如设未知数&#34;letter&#34;依次取python中的各个字母，当&#34;letter&#34;取到h时for循环就终止，即不再取o与n两个值。</p>
+<pre><code>for letter in &#39;python&#39;:
+    if letter == &#39;h&#39;:
+        break
+    print(&#39;当前字母：&#39;,letter)
+</code></pre>
+<h2>continue元素</h2>
+<p>虽然continue与break均有终止的含义，但区别在于continue仅仅是终止本次循环，而break时终止接下来的全部循环，例如下图中，如果采用continue，此输出会仅仅终止h字母的出现，而python中的其余字母均会被输出，所以说这也是continue终止循环的特点。</p>
+<pre><code>for letter in &#39;python&#39;:
+    if letter == &#39;h&#39;:
+        continue
+    print(&#39;当前字母：&#39;,letter)
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>对于终止循环中的break与continue的特点我们要区分开来，不能混淆一谈，同时还要利用其特点来更好的</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,94 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>顶部导航标签栏</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="顶部导航标签栏"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="问题描述" duration="0">
+        <p>当我们在一个小程序中想要查看某些信息，总是以页面顶部的一个导航栏展示出来，点击该导航栏上的各个标签则会出现对应页面内容。而如何实现顶部的标签导航栏，并展示其中内容呢？</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="效果图" duration="0">
+        <p><img src="img/fb212d129a393019.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="解决步骤" duration="0">
+        <h2>引入组件</h2>
+<p>在json中引入tab组件。</p>
+<pre><code>{
+  &#34;usingComponents&#34;: {
+    &#34;van-tab&#34;: &#34;/dist/tab/index&#34;,
+    &#34;van-tabs&#34;: &#34;/dist/tabs/index&#34;
+  }
+}
+
+</code></pre>
+<h2>van-tabs配置主页</h2>
+<p>在van-tabs标签中加入bind:change事件；通过active设定当前激活标签对应的索引值，默认情况下启用第一个标签。wxml代码如下：</p>
+<pre><code>&lt;van-tabs active=&#34;&#123;&#123; active }}&#34; bind:change=&#34;onChange&#34;&gt;
+  &lt;van-tab title=&#34;正在热映&#34;&gt;内容 1&lt;/van-tab&gt;
+  &lt;van-tab title=&#34;搜索&#34;&gt;内容 2&lt;/van-tab&gt;
+  &lt;van-tab title=&#34;分类&#34;&gt;内容 3&lt;/van-tab&gt;
+&lt;/van-tabs&gt;
+
+</code></pre>
+<h2>js配置</h2>
+<p>在js中，配置onChange条件函数。</p>
+<pre><code>Page({
+  data: {
+    active: 1
+  },
+
+  onChange(event) {
+    wx.showToast({
+      title: `切换到标签 ${event.detail.name}`,
+      icon: &#39;none&#39;
+    });
+  }
+})
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>在设置一个信息展示页面时，用顶部标签导航让我们的页面跳转更便捷。同样我们可以在页面中设置我们需要的内容。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

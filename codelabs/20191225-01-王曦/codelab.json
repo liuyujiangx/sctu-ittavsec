@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "source": "md文件/20191215-01-王曦.md",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-02-21T13:13:38+08:00",
+  "id": "20191225-01-王曦",
+  "duration": 0,
+  "title": "二进制链表转整数",
+  "summary": "demo",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "python"
+  ],
+  "tags": [
+    "sctu-leetcode"
+  ],
+  "feedback": "http://www.sctu.edu.cn",
+  "url": "20191225-01-王曦"
+}

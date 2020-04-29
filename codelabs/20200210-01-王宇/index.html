@@ -1,0 +1,59 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>阿里云服务器tomcat无法访问解决办法</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="阿里云服务器tomcat无法访问解决办法"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="在阿里云为tomcat端口号添加访问权限" duration="0">
+        <p>第一步：进入服务器管理控制台</p>
+<p>第二步：选择安全所属的防火墙，我们可以看见防火墙选项卡中，并没有我们刚才所访问的8081端口范围</p>
+<p><img src="img/28b757889b9c50b.png"></p>
+<p>第三步：选择右上方的添加规则，我们不用更改应用类型和协议，只需要在端口范围填写我们的tomcat端口号即可。</p>
+<p><img src="img/330db06765471643.png"></p>
+<p>第四部，接下来我们再次测试一下之前的网址能否正常访问。</p>
+<p><img src="img/d325ff03ff9dc020.png"></p>
+<p>这就成功了！</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="更改Tomcat端口号" duration="0">
+        <p>我们知道tomcat的默认端口号是8080，那么我们如何把端口号改成我们需要的端口号呢？<br>第一步：找到tomcat所属文件夹下的conf/server.xml文件</p>
+<p><img src="img/d8c3c3ae3a366c85.png"></p>
+<p>第二步：打开server.xml文件，找到，<br>将port=&#34;8080&#34;,改为port=&#34;8081&#34;。</p>
+<p><img src="img/b7f5eb8542f2a062.png"></p>
+<p>我们的更改也就完成了。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

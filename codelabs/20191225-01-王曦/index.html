@@ -1,0 +1,85 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>二进制链表转整数</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="二进制链表转整数"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="案例介绍" duration="0">
+        <p>给你一个单链表的引用结点 head。链表中每个结点的值不是 0 就是 1。已知此链表是一个整数数字的二进制表示形式。<br>请你返回该链表所表示数字的 十进制值 。<br>示例 1：<br>输入：head = [1,0,1]<br>输出：5<br>解释：二进制数 (101) 转化为十进制数 (5)<br>示例 2：<br>输入：head = [0]<br>输出：0<br>示例 3：<br>输入：head = [1]<br>输出：1<br>示例 4：<br>输入：head = [1,0,0,1,0,0,1,1,1,0,0,0,0,0,0]<br>输出：18880<br>示例 5：<br>输入：head = [0,0]<br>输出：0</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="案例实现" duration="0">
+        <p>通过观察题目我们可以发现，此题最主要的难点是对于链表的操作，如何从链表中拿出想要的值。首先我们要了解链表，链表是由结点组成，形如字典<br>ListNode{val: 1, next: ListNode{val: 0, next: ListNode{val: 1, next: None}}}<br>我们可以一层一层的将值取出并转换为列表，然后就好解决了</p>
+<h2>将链表转化列表</h2>
+<pre><code>l = []
+while head:
+   l.append(head.val)
+   head = head.next
+</code></pre>
+<h2>用int函数</h2>
+<pre><code>s = [str(i) for i in head]
+s = &#39;&#39;.join(s)
+print(int(s,2))
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="全部代码" duration="0">
+        <pre><code> Definition for singly-linked list.
+ class ListNode:
+     def __init__(self, x):
+         self.val = x
+         self.next = None   
+class Solution:
+    def getDecimalValue(self, head: ListNode) -&gt; int:
+        l = []
+        while head:
+            l.append(head.val)
+            head = head.next
+        s = [str(i) for i in l]
+        s = &#39;&#39;.join(s)
+        return int(s,2)
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>拿到问题应多多分析，此题主要是理解链表的原理并加以利用，就可以解决了。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

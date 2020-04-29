@@ -1,0 +1,111 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>更换头像</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="更换头像"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="案例描述" duration="0">
+        <p>我们在使用小程序的时候，注册个人账号时，通常会有要更换个人头像的情况，那么这个上传图片文件更换头像的过程该如何实现呢？</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="效果图" duration="0">
+        <p><img src="img/920db8d7704b2e46.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="实现步骤" duration="0">
+        <h2>wxml配置</h2>
+<p>wxml中要配置一个bindtap绑定事件headimage；以及对要作为头像的图片进行head的数据绑定进行配置。代码如下：</p>
+<pre><code>&lt;view class=&#39;v1&#39;&gt;   
+&lt;image class=&#39;head&#39; bindtap=&#34;headimage&#34; src=&#39;&#123;&#123;head}}&#39;&gt;&lt;/image&gt;  
+&lt;view class=&#39;text&#39;  mode=&#34;aspecFill&#34; bindtap=&#34;headimage&#34;&gt;点击更换头像&lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+<h2>wxss配置</h2>
+<p>wxss中只需要配置所需的头像边框形式（border-radius）、颜色以及图文大小、位置即可。代码如下：</p>
+<pre><code>.v1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.head {
+  margin-top: 30rpx;
+  width: 200rpx; 
+  height: 200rpx; 
+  border-radius: 50%; 
+  border: 1px solid dimgrey;
+}
+
+.text { 
+  line-height: 50rpx;  
+  color: lightgray;  
+  font-size: 35rpx;  
+}
+</code></pre>
+<h2>js配置</h2>
+<p>js中配置绑定对数据内容或已绑定的事件处理函数。<br>head数据配置初始呈现头像图片，headimage作为事件处理函数中使用一个API wx.chooseImage来从本地相册选择图片或使用相机拍照。代码如下：</p>
+<pre><code>data{
+  showModal: false,
+  head: &#34;/images/touxiang.jpg&#34;,
+  },
+  // 点击更换手机相册或者电脑本地图片    
+  headimage: function () {
+    var _this = this;
+    wx.chooseImage({
+      count: 1, // 默认9      
+      sizeType: [&#39;original&#39;, &#39;compressed&#39;],
+      // 指定是原图还是压缩图，默认两个都有      
+      sourceType: [&#39;album&#39;, &#39;camera&#39;],
+      // 指定来源是相册还是相机，默认两个都有    
+      success: function (res) {    
+        _this.setData({
+          head: res.tempFilePaths
+        })
+      }
+    })
+  },
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>更换头像是小程序日常使用非常普遍的操作，应用广泛值得掌握，但是本次配置存在的不足时更换头像之后无法保存的问题。请持续关注，后续会继续改进。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

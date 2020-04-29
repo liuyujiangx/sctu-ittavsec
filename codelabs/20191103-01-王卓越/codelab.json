@@ -1,0 +1,22 @@
+{
+  "environment": "web",
+  "source": "md文件/20191103-01-王卓越.md",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-02-17T15:17:58+08:00",
+  "id": "20191103-01-王卓越",
+  "duration": 0,
+  "title": "关于小程序中的中的基础",
+  "summary": "demo",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "wechat"
+  ],
+  "tags": [],
+  "feedback": "http://www.sctu.edu.cn",
+  "url": "20191103-01-王卓越"
+}

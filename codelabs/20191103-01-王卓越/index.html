@@ -1,0 +1,77 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>关于小程序中的中的基础</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="关于小程序中的中的基础"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="案例介绍" duration="0">
+        <p>在第一次接触小程序时，我们并不知道小程序中的一些功能，今天让我们了解一下</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="app.json介绍" duration="0">
+        <p>app.json是当前小程序中的全局配置，包括了小程序的所有页面路径，界面表现，网络超时时间，底部tab等。</p>
+<h2>pages的内部关系</h2>
+<p>Pages字段-用于描述当前小程序所有的页面路径，这是为了让微信客户端知道当前你的小程序页面定义在那个目录。</p>
+<h2>window的关系</h2>
+<p>Window字段-定义小程序所有页面的顶部背景颜色，文字颜色定义。再window中的常见属性：<br>navigationBarBackgroundcolor(导航栏的背景颜色。)<br>navigationBarTextstyle(导航栏标题颜色，仅支持black/white)<br>navigationBarTitleText(导航栏标题文字内容。)<br>navigationstyle(导航栏样式。)<br>backgroundcolor(窗口的背景色。)<br>backgroundTextstyle(下拉loading的样式，仅支持dark/light。)<br>enablePullDownRefrsh(是否开启全局的下拉刷新，可选true/false。)<br>onReachBottonDistance(页面上拉触底时距页面底端的距离。单位为px。)</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="wxss的介绍" duration="0">
+        <p>Wxss是一套样式语言，用于描述wxml的组件样式，wxss用来决定wxml的组件应该怎么显示，与其css相比，wxss更好的的改进。例如我所用的wxss来描述组件样式。</p>
+<pre><code>.h1{
+    display:flex;
+    flex-dircter:table-row;
+    border:10px solid #ffffff
+}
+</code></pre>
+<p>需要注意的是当再你所书写的文件下，如我再index.wsxx中书写的格式将覆盖我再app.wsxx中所书写的格式，也就是说在你所在的文件中书写的格式应该是第一位。我个人感觉跟css格式差距不大，都用了class来连接。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="tabBar的介绍" duration="0">
+        <p>tabBar主要是来描述小程序中的边框的，常见的属性：<br>color（tab上的文字默认颜色。）<br>selected（tab上的文字选中时的颜色。）<br>background（tab的背景颜色。）<br>borderstyle（tabBar上边框的颜色，仅支持black/white。）<br>position（tabBar的位置，仅支持bottom/top。）<br>pagepath（页面路径，必须在pages中先定义。）<br>text（tab上按钮文字。）<br>iconpath（图片路径icon大小为40kb。）<br>selectedlconpath（选中时图片的路径。）</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>总体来说，小程序与html的相似之处还是有很多的，但也有许多的不同，比如说文字居中，就不能用aligin=&#34;center&#34;来居中，而是用了wsxx中的格式，类似与css格式来居中，好像目前我只知道的居中方法，希望可以更快的了解并熟悉小程序。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

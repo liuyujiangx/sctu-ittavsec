@@ -1,0 +1,144 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>微信小程序的上、下拉菜单</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="微信小程序的上、下拉菜单"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="案例介绍" duration="0">
+        <p>Duration :3:00<br>我们在使用小程序的时候基本的页面的一般都是很简洁的，所以会有一些菜单来做简单的诠释说明，或者是提供一些选项。这些菜单的弹出方式一般是向上和向下，那么如何来设置这些上下拉的菜单呢？</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="案例分析" duration="0">
+        <p>Duration :3:00<br>上下拉菜单在微信小程序中起提示、选项的功能，当你点击它时会弹出属于这个菜单的相应选项。我们要使用vant组件库，将dist文件提前下载好然后保存到项目中。我们在小程序中调用组件库，并在正确引用就可以实现了菜单功能了。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="案例实现" duration="0">
+        <p>Duration :10:00</p>
+<h2>一、下拉菜单</h2>
+<h3>（1）在json中调用van-tab组件。</h3>
+<pre><code>  &#34;usingComponents&#34;: {
+    &#34;van-dropdown-menu&#34;: &#34;/dist/dropdown-menu/index&#34;,
+&#34;van-dropdown-item&#34;: &#34;/dist/dropdown-item/index&#34;,
+  }
+}
+
+</code></pre>
+<h3>（2）在js中对菜单进行设置。</h3>
+<p>option：设置菜单内容，</p>
+<p>value：设置菜单内容的排列顺序</p>
+<pre><code> Page({
+data: {
+    option1: [
+      { text: &#39;白色；S&#39;, value: 0 },
+      { text: &#39;白色；M&#39;, value: 1 },
+      { text: &#39;白色；L&#39;, value: 2 }
+    ],
+    value1: 0,
+  },
+});
+
+</code></pre>
+<h3>（3）在wxml中实现。</h3>
+<p>Active-color设置选中状态颜色，</p>
+<p>Value设置排列顺序，</p>
+<p>Option菜单内容</p>
+<pre><code>&lt;van-dropdown-menu active-color=&#34;#ee0a24&#34;&gt;
+  &lt;van-dropdown-item value=&#34;&#123;&#123; value1 }}&#34; options=&#34;&#123;&#123; option1 }}&#34; /&gt;
+&lt;/van-dropdown-menu&gt;
+</code></pre>
+<p><img src="img/aa6122b0e46434d.png"></p>
+<h2>二、上拉菜单</h2>
+<h3>（1）在json中调用van-tab组件。</h3>
+<pre><code>  &#34;usingComponents&#34;: {
+    &#34;van-action-sheet&#34;: &#34;/dist/action-sheet/index&#34;  
+}
+}
+
+</code></pre>
+<h3>（2）在js中对菜单进行设置。</h3>
+<p>name：设置菜单选项，</p>
+<p>subname： 设置副标题，</p>
+<p>color：设置颜色</p>
+<pre><code>Page({ 
+data: { 
+show: false, 
+actions: [ 
+{ 
+name: &#39;选项&#39; 
+}, 
+{ 
+name: &#39;选项&#39; 
+}, 
+{ 
+name: &#39;选项&#39;,
+subname: &#39;副文本&#39;, 
+openType: &#39;share&#39; 
+} 
+] 
+}, 
+onClose() { 
+this.setData({ show: false }); 
+},
+onSelect(event) { 
+console.log(event.detail); 
+} 
+});
+
+</code></pre>
+<h3>（3）在wxml中实现。</h3>
+<p>:设置上来菜单</p>
+<p>bind:select=&#34;onSelect&#34; ：选中选项时触发，禁用或加载状态下不会触发</p>
+<p>bind:close=&#34;onClose&#34; ：关闭时触发</p>
+<pre><code>&lt;van-action-sheet 
+show=&#34;&#123;&#123; show }}&#34; 
+actions=&#34;&#123;&#123; actions }}&#34; 
+bind:close=&#34;onClose&#34; 
+bind:select=&#34;onSelect&#34; 
+/&gt;
+
+</code></pre>
+<p><img src="img/f23a43c16885f5de.png"><img src="img/49cd8b40f45b7148.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>Duration :3:00<br>设置上下拉菜单可以使我们的小程序界面简洁，我们在设置菜单的时候要注意对菜单内容和排列顺序设置正确。菜单跟其他的组件有一点点不同菜单一般是在js里面进行配置，我们可以根据自己的需要在js中对菜单进行设置。菜单设置的标签有很多，需要我们理解运用。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

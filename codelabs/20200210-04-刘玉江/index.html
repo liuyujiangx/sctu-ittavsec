@@ -21,9 +21,7 @@
 </head>
 <body>
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
-  <google-codelab codelab-gaid=""
-                  id="20200210-04-刘玉江"
-                  title="浅谈Cookie"
+  <google-codelab title="浅谈Cookie"
                   environment="web"
                   feedback-link="http://www.sctu.edu.cn">
     
@@ -46,7 +44,7 @@ response.addCookie(cookie);
 
 </code></pre>
 <p>在浏览器中可以查看到我们设置了number=12、Max-Age=60，还可以看见设置的时间</p>
-<p class="image-container"><img alt="效果图" src="img\6464a1926fc8b66.png"></p>
+<p><img alt="效果图" src="img/6464a1926fc8b66.png"></p>
 <p>在这里我们设置了MaxAge，这是Cookie的有效期，单位为秒。<code>Cookie</code>中通过<code>getMaxAge()</code>和<code>setMaxAge(int maxAge)</code>来读写该属性。<code>maxAge</code>有3种值，分别为正数，负数和0。如果<code>maxAge</code>属性为正数，则表示该Cookie会在<code>maxAge</code>秒之后自动失效。浏览器会将<code>maxAge</code>为正数的Cookie持久化，即写到对应的Cookie文件中。无论客户关闭了浏览器还是电脑，只要还在maxAge秒之前，登录网站时该Cookie仍然有效。当<code>maxAge</code>属性为负数，则表示该Cookie只是一个临时Cookie，不会被持久化，仅在本浏览器窗口或者本窗口打开的子窗口中有效，关闭浏览器后该Cookie立即失效。当<code>maxAge</code>为0时，表示立即删除Cookie</p>
 <p>我们再通过以下方式获取Cookie：</p>
 <pre><code>//服务端获取客户端携带的cookie：通过HttpServletRequest获取

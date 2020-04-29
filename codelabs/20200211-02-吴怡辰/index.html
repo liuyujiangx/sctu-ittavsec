@@ -1,0 +1,88 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>基础全局配置和页面配置</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="基础全局配置和页面配置"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="全局配置" duration="0">
+        <h2>图标下载</h2>
+<p>全局配置的图标我们可以直接在网上搜索并下载PNG的格式，将其保存在你所新建的一个在你的小程序pages文件夹下的一个image文件夹里。如下图：<br><img src="img/49d76b232314d1a5.jpg"></p>
+<h2>app.json配置</h2>
+<p>在app.json中，增加一个tabBar标签，并在这个标签里面写关于底部的图标和文字等内容。同时需要链接一个&#34;&#34;pages&#34;:[ ]&#34;，在全局配置的代码最顶部，在[ ]中写入pagePath的内容。</p>
+<pre><code>{
+      &#34;pagePath&#34;: &#34;pages/index/index&#34;,
+      &#34;text&#34;: &#34;首页&#34;,
+      &#34;iconPath&#34;: &#34;pages/img/shouye.png&#34;,
+      &#34;selectedIconPath&#34;: &#34;pages/img/shouye.png&#34;
+    },
+    {   
+      &#34;pagePath&#34;: &#34;pages/logs/logs&#34;,
+      &#34;text&#34;: &#34;分类&#34;,
+      &#34;iconPath&#34;: &#34;pages/img/fenlei.png&#34;,
+      &#34;selectedIconPath&#34;: &#34;pages/img/fenlei.png&#34;
+    },
+    {
+      &#34;pagePath&#34;: &#34;pages/xinjian/xinjian&#34;,
+      &#34;text&#34;: &#34;收藏&#34;,
+      &#34;iconPath&#34;: &#34;pages/img/shoucang.png&#34;,
+      &#34;selectedIconPath&#34;: &#34;pages/img/shoucang.png&#34;
+    }
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="页面配置" duration="0">
+        <p>页面插入图片需要一个image标签，而要让图片下的文字和图片都居中，可以让图片和文字都在同一个view标签里面，然后通过wxss来设置样式。</p>
+<h2>插入图片（wxml代码）</h2>
+<pre><code>&lt;view class=&#34;shisheng&#34;&gt;
+     &lt;image src=&#34;/pages/img/shisheng.jpg&#34; mode=&#34;aspectFill&#34;&gt;&lt;/image&gt;
+     &lt;text&gt;《时生》——东野圭吾&lt;/text&gt;
+     &lt;text&gt;\n&lt;/text&gt;
+&lt;/view&gt;
+
+</code></pre>
+<h2>图文居中（wxss代码）</h2>
+<pre><code>.shisheng{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+</code></pre>
+<p>总结</p>
+<p>在添加图标或图片时，直接将其拖动到小程序开发工具里的image文件夹下是不可以的，需要在复制到电脑里的存放小程序文件的文件夹里的image文件夹。全局配置时尤其注意对&#34;[ ]&#34;和&#34;{ }&#34;的使用及每个未完结的 ] 和 } 后面的英文状态下的逗号。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

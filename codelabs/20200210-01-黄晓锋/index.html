@@ -1,0 +1,82 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>maven在compile编译时出错</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="maven在compile编译时出错"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="遇到问题" duration="0">
+        <p>Maven在进行compile编译时控制台可能会BUILD FAILURE，并且报出以下错误：<br>[ERROR]不再支持源选项5。请使用6或更高版本。<br>[ERROR] 不再支持目标选项1.5。请使用1.6或更高版本。<br><img src="img/4cf544aa107ed3a1.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="可能原因" duration="0">
+        <ol type="1">
+<li>可能由于自己电脑里安装了多个jdk版本，maven不知道用哪一个。</li>
+<li>由于pom配置文件里没有配置jdk属性。</li>
+</ol>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="解决办法" duration="0">
+        <p>找到自己项目的pom.xml配置文件，并在文件中添加maven编译时的jdk设置。<br>编辑pom.xml，添加以下代码配置:</p>
+<pre><code>&lt;profile&gt;
+
+    &lt;id&gt;jdk-11&lt;/id&gt;
+    &lt;activation&gt;
+        &lt;activeByDefault&gt;true&lt;/activeByDefault&gt;
+        &lt;jdk&gt;11&lt;/jdk&gt;
+    &lt;/activation&gt;
+
+    &lt;properties&gt;
+    &lt;project.build.sourceEncoding&gt;UTF-8&lt;/project.build.sourceEncoding&gt;
+        &lt;maven.compiler.source&gt;11&lt;/maven.compiler.source&gt;
+        &lt;maven.compiler.target&gt;11&lt;/maven.compiler.target&gt;
+    &lt;/properties&gt; 
+
+&lt;/profile&gt;
+</code></pre>
+<p>因为现在我现在使用的jdk版本是11.0.2，所以写的11，大家就更据自己的情况填写。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="问题解决" duration="0">
+        <p>最后再次进行clean compile，eclipse控制台显示BUILD SUCCESS。</p>
+<p><img src="img/11db29b1537b9c54.png"></p>
+<p>到这里问题就已经解决了，而且如果还想要修改用户或全局的配置的话，就需要进入.m2\settings.xml或apache-maven-3.6.0\conf\settings.xml路径里的setting.xml文件中加入这段代码就可以了。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

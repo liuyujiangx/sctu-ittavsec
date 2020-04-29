@@ -1,0 +1,63 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Vscode克隆git项目(外加提交和更新教程)</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="Vscode克隆git项目(外加提交和更新教程)"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="解决过程" duration="0">
+        <p>一、  选择view-&gt;terminal,也就是打开我们的终端，也可以直接ctrl+`。<br> <img src="img/236210852d110e10.png"></p>
+<p>二、  在终端输入git clone url（下载地址）</p>
+<p><img src="img/9fb9fadcccea57fe.png"></p>
+<p>三、  等待下载完成，耐心等待，如果下载失败，就把目标文件夹删了，再次下载，一定要把目标文件夹删了，下载才会进行，不然会报错。</p>
+<p><img src="img/b3295a3855eeaf45.png"></p>
+<p>四、cloning into 后面接的就是我们下载的目录，我们点击open folder，就会让我们选择文件夹。如果找不到下载的目录，我们可以提前在终端将目标文件夹复制，在电脑的搜索框搜索其位置，并复制即可</p>
+<p><img src="img/b2934ff7fa2d01b7.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="效果呈现" duration="0">
+        <p>效果图如下：</p>
+<p><img src="img/20fecaa2240ba79a.png"></p>
+<p>## 提交</p>
+<p>一、pull，我们选择左侧栏的第三个选项source control，我们选择...（刷新右侧）这个选项，选择pull，等待pull执行完成。<br><img src="img/cea1e75593c58784.png"><br>二、Commit All，我们选择commit all，这时在vscode界面上面会弹出一个输入框，我们在输入框内输入内容，再enter，这时我们发现左侧的文件不见了，即可进行下一步。<br><img src="img/4cbe73e94c07862.png"><br>三、push，最后我们点击push，就可以看见左下方正在上传。耐心等待至上传完毕，我们就提交成功了。<br><img src="img/c439eaef9f98d409.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="更新" duration="0">
+        <p>更新与提交同理。我们先找到我们需要改的文件，进行修改，修改完成后，我们进行保存。修改之后进行保存的文件，软件会自动将其分配在source control栏，然后我们就进行pull，commit all，push三部曲啦。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

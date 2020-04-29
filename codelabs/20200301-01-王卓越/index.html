@@ -1,0 +1,127 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Python中yield的解析及用法</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="Python中yield的解析及用法"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="什么是yield函数？" duration="0">
+        <p>Python中yield函数是一个生成器(generator),可用于迭代；在函数中yield类似于return，不同的是，yield返回一个return的值并且记住这个返回值的位置，下次迭代就从记住的这个位置开始，及下一次迭代时，从上一次迭代遇到的yield后面的代码开始执行。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="yield函数的特点及用法。" duration="0">
+        <p>yield函数的优点在于它可迭代，但又不直接生成返回值，如果采用return来返回值，就会直接生成返回值；如果返回的值，或者迭代的数据太大，都会使得内存消耗过大；yield函数就会很好的减少内存的消耗，但是它只可读取一次。带有yield的函数不仅仅可以用于for循环，还可以用于函数的参数，例如；</p>
+<pre><code>#用于for循环
+def yields(n):
+    print(&#39;yield用法:&#39;)
+    while n&lt;10:
+        n+=1
+        yield n
+    return &#39;pass&#39;
+c=yields(0)
+print(next(c))
+print(next(c))
+print(next(c))
+输出：
+1
+2
+3
+
+#用于函数的参数
+def a():
+    print(&#39;aaa&#39;)
+    p = yield &#39;123&#39;
+    print(&#39;bbb&#39;)
+    k = yield &#39;234&#39;
+r = a()
+print(next(r))
+输出：
+aaa
+123
+</code></pre>
+<p>思考一下如果我们将用于函数参数的yield再增加一个输出next()会发生什么情况呢？</p>
+<pre><code>def a():
+    print(&#39;aaa&#39;)
+    p = yield &#39;123&#39;
+    print(&#39;bbb&#39;)
+    k = yield &#39;234&#39;
+r = a()
+print(next(r))
+print(next(r))
+
+输出：
+aaa
+123
+bbb
+234
+</code></pre>
+<p>由以上代码以及运行结果我们不难发现，每一个next返回值，都会在执行到yield函数后暂停生成，下一次next返回值则会继续从上一个暂停的位置执行，这也是yield函数的特点与用法。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="send()与next()用法的异同。" duration="0">
+        <p>next()函数可以不断打印yield生成器的值;<br>send()函数特别之处在于它可以携带参数，并修改上一个表达式的值，同时用法也与next()有很多相同之处；</p>
+<h2>相同点</h2>
+<p>相同点在于，当send()所携带的参数为None(即未携带任何参数)时，用法与next()一模一样，都仅仅是来打印yield生成器的值。</p>
+<h2>不同点</h2>
+<p>不同点在于当send()所携带的参数时，就会将所带参数赋值给上一个表达式；实例：</p>
+<pre><code>def a():
+    print(&#39;send():&#39;)
+    i = yield 123
+    print(i)
+    if i==234:
+        print(&#34;send传入的参数为234&#34;)
+    k = yield 345
+    print(k)
+r=a()
+next(r)
+r.send(234)
+
+输出：
+send()：
+234
+Send传入的参数为234
+</code></pre>
+<p>分析：首先执行next®，当第一次遇见yield跳出输出send()：；然后执行r.send(234)，send()直接将234参数传给i中并从yield位置继续执行，输出i，值为234，然后输出if条件语句，当执行到下一个yield时，也就是k=yield 345时，跳出。<br>注意：yield的第一次执行一定为next®或者r.send(None)。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>该文从介绍yield函数入手，主要为大家讲述了yield函数的用法及其特点，利用实例区分了next()和send()在打印生成器方法的异同，有助于大家更快的掌握yield函数的用法。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

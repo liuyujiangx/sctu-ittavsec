@@ -1,0 +1,20 @@
+{
+  "environment": "web",
+  "source": "md文件/20200212-04-杨金月.md",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-02-17T15:17:58+08:00",
+  "id": "20200212-04-杨金月",
+  "duration": 0,
+  "title": "基于 TensorFlow.js 的迁移学习图像分类器",
+  "summary": "demo",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": null,
+  "tags": [],
+  "feedback": "http://www.sctu.edu.cn",
+  "url": "20200212-04-杨金月"
+}

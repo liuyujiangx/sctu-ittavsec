@@ -1,0 +1,103 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>配置商品导航</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="配置商品导航"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="问题描述" duration="0">
+        <p>在我们打开购物小程序时，总是会出现加购导航，那么如何实现一个商品导航呢？</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="效果图" duration="0">
+        <p><img src="img/3d5201e59fb99ed1.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="解决步骤" duration="0">
+        <h2>json引入组件&#34;goods-action-button&#34;</h2>
+<pre><code>&#34;van-goods-action&#34;: &#34;/dist/goods-action/index&#34;,
+  &#34;van-goods-action-icon&#34;: &#34;/dist/goods-action-icon/index&#34;,
+  &#34;van-goods-action-button&#34;: &#34;/dist/goods-action-button/index&#34;
+
+</code></pre>
+<h2>wxml配置</h2>
+<p>在一个标签下创建四个子标签，每个子标签写入bind:click传递点击事件参数，为配置js做准备。</p>
+<pre><code>&lt;van-goods-action&gt;
+  &lt;van-goods-action-icon
+    icon=&#34;chat-o&#34;
+    text=&#34;客服&#34;
+    bind:click=&#34;onClickIcon&#34;
+  /&gt;
+  &lt;van-goods-action-icon
+    icon=&#34;cart-o&#34;
+    text=&#34;购物车&#34;
+    bind:click=&#34;onClickIcon&#34;
+  /&gt;
+  &lt;van-goods-action-button
+    text=&#34;加入购物车&#34;
+    type=&#34;warning&#34;
+    bind:click=&#34;onClickButton&#34;
+  /&gt;
+  &lt;van-goods-action-button
+    text=&#34;立即购买&#34;
+    bind:click=&#34;onClickButton&#34;
+  /&gt;
+&lt;/van-goods-action&gt;
+
+</code></pre>
+<h2>js配置</h2>
+<p>onClickIcon配置点击事件条件处理函数</p>
+<pre><code>Page({
+  onClickIcon() {
+    Toast(&#39;点击图标&#39;);
+  },
+
+  onClickButton() {
+    Toast(&#39;点击按钮&#39;);
+  }
+});
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>购物车在日常使用中非常普遍，小程序掌握其开发方法十分有用。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

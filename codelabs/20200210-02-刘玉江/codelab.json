@@ -1,15 +1,14 @@
 {
   "environment": "web",
+  "source": "md文件/20200210-02-刘玉江.md",
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2020-02-10T22:01:51+08:00",
+  "updated": "2020-02-10T22:01:52+08:00",
   "id": "20200210-02-刘玉江",
   "duration": 20,
   "title": "Flask实现简单搜索功能",
-  "authors": "刘玉江",
   "summary": "demo",
-  "source": "20200210-02-刘玉江.md",
   "theme": "",
   "status": [
     "published"

@@ -1,0 +1,22 @@
+{
+  "environment": "web",
+  "source": "md文件/20200211-05-吴怡辰.md",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-02-11T14:59:44+08:00",
+  "id": "20200211-05-吴怡辰",
+  "duration": 0,
+  "title": "表单数据绑定",
+  "summary": "demo",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "wechat"
+  ],
+  "tags": [],
+  "feedback": "http://www.sctu.edu.cn",
+  "url": "20200211-05-吴怡辰"
+}

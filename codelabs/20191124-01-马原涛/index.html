@@ -1,0 +1,107 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>在微信小程序中调用tensorflow自定义模型</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="在微信小程序中调用tensorflow自定义模型"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="问题提出" duration="0">
+        <p>在成功调用官网打包好的tensorflowjs模型后，我怎么调用自己的模型呢？又需要做哪些处理呢？</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="问题解决" duration="0">
+        <ol type="1">
+<li>安装好python和tensorflow</li>
+<li>安装tensorflowjs : pip install tensorflowjs注：如果你的tensorflow版本是2.0的，在下载tfjs时可能会被更新为1.15版本的。可以考虑新建个python环境。</li>
+<li>准备已经训练好的模型，并通过 model.save(&#34;模型命名.h5&#34;) 代码将模型保存为h5格式的文件。<br>下面是本文使用的mnist手写数字集的模型代码案例。</li>
+</ol>
+<pre><code>import tensorflow as tf
+mnist = tf.keras.datasets.mnist
+(x_train, y_train),(x_test, y_test) = mnist.load_data()
+x_train, x_test = x_train / 255.0, x_test / 255.0
+model = tf.keras.models.Sequential([
+  tf.keras.layers.Flatten(input_shape=(28, 28)),
+  tf.keras.layers.Dense(128, activation=&#39;relu&#39;),
+  tf.keras.layers.Dropout(0.2),
+  tf.keras.layers.Dense(10, activation=&#39;softmax&#39;)
+])
+model.compile(optimizer=&#39;adam&#39;,
+              loss=&#39;sparse_categorical_crossentropy&#39;,
+              metrics=[&#39;accuracy&#39;])
+model.fit(x_train, y_train, epochs=5)
+model.evaluate(x_test, y_test)
+model.save(&#39;D:\\test/mnist.h5&#39;)
+
+
+</code></pre>
+<p>4)  通过tensorflowjs_converter命令将h5格式的模型文件转换为json格式的文件。</p>
+<pre><code>    1.打开pycharm的Terminal指令框
+</code></pre>
+<pre><code>    2. 输入转换指令：
+    tensorflowjs_converter --input_format=keras D:\\test/mnist.h5  D:\\test 
+    注释：tensorflowjs_converter –模型格式 模型地址 保存地址
+    3.查看model.json是否生成
+</code></pre>
+<p>5)  将模型放在服务器上，如果没有可以在本地创建，步骤如下</p>
+<pre><code>1.  打开pycharm的Terminal的指令框
+2.  输入python3 -m http.server 8000
+3.  打开浏览器输入 localhost:8000  输出如下界面
+</code></pre>
+<p><br>   如果出现localhost拒绝访问,可能是你的系统没开启iis服务，只能手动开启了。<br><br>   未开启的建议依次按以下步骤来：<br><br>            1.百度：如何安装iss服务<br>            2.打开管理工具<br><br></p>
+<pre><code>        3.进入管理工具界面，单击&#34;Internet Information Services (IIS)管理器&#34;。
+
+        4.右键单击&#34;网站&#34;，选择&#34;添加网站&#34;。
+</code></pre>
+<pre><code>        5.在弹出的界面中输入网站名称、选择物理路径(model.json所在的文件地址)、IP地址输入为127.0.0.1、端口为8000，然后点击确定。
+
+        6.打开目录展示功能：目录浏览—打开功能—启用
+</code></pre>
+<p>6) 在项目中安装相应的库</p>
+<p>   详细过程请参考之前发布的博客《微信小程序与tensorflow.js准备工作》</p>
+<p>在项目目录下使用npm安装对应包，安装代码如下：</p>
+<pre><code>npm install fetch-wechat
+
+npm install @tensorflow/tfjs-converter
+
+npm install @tensorflow/tfjs-core
+
+npm install @tensorflow/tfjs-layers
+
+npm install regenerator-runtime
+</code></pre>
+<p>7) 效果</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

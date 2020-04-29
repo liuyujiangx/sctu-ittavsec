@@ -1,0 +1,247 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Java8 新特性 入门</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="Java8 新特性 入门"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="前言" duration="0">
+        <p>Duration： 2：00<br>  Java8已经出现了很久了，但是呢，还是有很多人都还在习惯使用以前的来版本JDK，或者是以前老版本的编程方式。通过一段时间对Java8新特性的学习之后，自己也深受感触，原来java8版本写代码可以这么简洁。Java8最主要的就是给我们编程的过程带来了很多便利，不仅仅是代码量少。更多的还是让程序更简洁，减少代码冗余。Java8新特性中有几个比较主要的特性，Lambda 表达式、函数式接口、方法引用和几个新增库Stream API、Optional类等。接下来就是对自己的学习内容做一个总结。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Lambda 表达式" duration="0">
+        <p>Duration： 40：00</p>
+<h2>Lambda表达式简介</h2>
+<p>  Lambda 表达式其实就是一种匿名函数，在这之前大家可能还接触过匿名内部类，虽然也是一种匿名函数，但是它并没有Lambda表达式那么简洁，Lambda表达式的特点就是可以传递，在使用Lambda表达式的时候我们可以将代码像数据一样传递。使用Lambda表达式能够极大的减少我们代码的冗余，而且使用也相当的方便。熟练之后会大大加快我们写代码的速度。</p>
+<h2>java8的方法与老版本的对比</h2>
+<p>  首先我们来尝试着找出公司员工年龄大于35岁的所有员工，这个问题都不是很难吧。我们用不同的方法来实现一下，我先给出几个不同的方法直接看看效果。首先我们应该做的是创建员工的数据，先创建一个Staff类来代表员工，并且使用构造函数来创建员工的集合。第一种方法来看看我使用的最常规的方法：</p>
+<pre><code>public List&lt;Staff&gt; getStaffs(List&lt;Staff&gt; staffs) {
+        List&lt;Staff&gt; stas = new ArrayList&lt;&gt;();
+        for(Staff sta:staffs){
+            if (sta.getAge() &gt;= 35){
+                stas.add(sta);
+            }
+        }
+        return stas;
+    }
+    @Test
+    public void test1(){
+        List&lt;Staff&gt; list = getStaffs(staffs);
+        for (Staff staf:list) {
+            System.out.println(staf);
+        }
+    }
+</code></pre>
+<p>  只看一种方法可能没有什么感觉，那么再看看第二种方法试试呢。这种方法也叫策略设计模式，我们需要写一个接口，然后实行这个接口，最后是调用接口。这种方法看起来就比前面的那种更有层次，而且假如又需要查找员工工资大于5000的员工的话，我们就可以重新写一个类来实现接口就好了，下面来看看代码。</p>
+<pre><code>public List&lt;Staff&gt; filterStaff(List&lt;Staff&gt; list,MyPredicate&lt;Staff&gt; mp){
+        List&lt;Staff&gt; staffs = new ArrayList&lt;&gt;();
+        for (Staff staff:list) {
+            if (mp.test(staff)){
+                staffs.add(staff);
+            }
+        }
+        return staffs;
+    }
+    @Test
+    public void test2(){
+        List&lt;Staff&gt; list = filterStaff(staffs,new filterStaffByAge());
+        for (Staff staf:list) {
+            System.out.println(staf);
+        }
+    }
+</code></pre>
+<p>  第三种方法是使用匿名内部类的方法，其实也是和第二种方法是差不多的。</p>
+<pre><code>public void test3(){
+        List&lt;Staff&gt; list = filterStaff(staffs, new MyPredicate&lt;Staff&gt;() {
+            @Override
+            public boolean test(Staff staff) {
+                return staff.getAge() &gt;= 35;
+            }
+        });
+        for (Staff staf:list) {
+            System.out.println(staf);
+        }
+    }
+</code></pre>
+<p>  这些方法都是java8之前可以使用的一些方法，那么java8以后有哪些方法呢？前面的方法看了之后有没有觉得很麻烦呢？要么是重新写方法，要么就是重新实现接口，这样就感觉很繁琐。Java8之后就不用再重新实现接口啦。</p>
+<pre><code>public void test4(){
+        List&lt;Staff&gt; list = filterStaff(staffs,(e) -&gt; e.getAge() &gt;= 35);
+        list.forEach(System.out::println);
+    }
+</code></pre>
+<p>  不知道你有没有发现什么问题呢？是不是有一部分代码直接代替了接口实现的类啊。那就是我们的Lambda表达式，代替接口实现的代码如下所示，非常的简短。</p>
+<pre><code>(e) -&gt; e.getAge() &gt;= 35)
+</code></pre>
+<p>  有没有发现我们前面的方法都建立在了同一个filterStaff函数上面呢？那么如果我们现在只有员工数据，没有filterStaff函数java8可不可以实现找出年龄大于35的员工呢？那答案是肯定的，那就要用到java8中的Stream API啦。代码如下：</p>
+<pre><code>public void test5(){
+        staffs.stream()
+                .filter((e) -&gt; e.getAge()&gt;=35)
+                .forEach(System.out::println);}
+</code></pre>
+<p>  没错，就短短的4行代码就能实现我们前面写的一大堆代码。看到这里我相信大家已经提起学习java8新特性的兴趣来了吧。</p>
+<h2>Lambda表达式语法</h2>
+<p>Lambda表达式的语法基础有哪些？</p>
+<h3>Lambda 表达式的语法基础：</h3>
+<p>Java8中引入了一个新的操作符&#34;-&gt;&#34;该操作符称为箭头操作符或Lambda 操作符。<br><br>箭头操作符将Lambda 表达式拆分成两部分：<br><br>左侧：Lambda 表达式参数列表。<br><br>右侧：Lambda 表达式中所需要执行的功能，即Lambda 体。<br><br>  语法格式一：无参数，无返回值。</p>
+<pre><code>       () -&gt; System.out.println(&#34;Hello&#34;);
+</code></pre>
+<p>  语法格式二：有一个参数，并且无返回值。</p>
+<pre><code>       (e) -&gt; System.out.println(e);
+</code></pre>
+<p>  语法格式三：若只有一个参数，参数的小括号可以省略。</p>
+<pre><code>       e -&gt; System.out.println(e);
+</code></pre>
+<p>  语法格式四：有两个以上的参数，又返回值，有多条执行语句。</p>
+<pre><code>       (x,y) -&gt; {
+            System.out.println(&#34;Lambda&#34;);
+            return Integer.compare(x,y);
+        };
+</code></pre>
+<p>  语法格式五：如果有两个以上的参数，又返回值，只有一条执行语句，Lambda 体的大括号和return可以省略。</p>
+<pre><code>       Comparator&lt;Integer&gt; con = (x,y)-&gt;Integer.compare(x,y);
+</code></pre>
+<p>  语法格式六：Lambda 表达式的参数列表的数据类型可以省略不写，因为JVM编译器可以通过上下文推断出数据类型，即&#34;类型推断&#34;。</p>
+<pre><code>       (Integer x,Integer y) -&gt; Integer.compare(x,y); 
+</code></pre>
+<h3>Lambda 表达式需要&#34;函数式接口&#34;的支持。</h3>
+<p>  函数式接口：接口中只有一个抽象方法，称为函数式接口。可以使用注解@FunctionalInterface修饰，可以检测是否为函数式接口。</p>
+<h2>Java8 四大内置核心函数式接口</h2>
+<p>  上面有提到，Lambda表达式需要&#34;函数式表达式&#34;的支持，我们都已经知道，函数式接口只能有一个抽象方法。是不是每次我们都需要创建一个接口呢？当然不是，其实java8给我们准备了现成的函数式接口让我们使用，除了很特殊的时候需要自己写函数式接口外，大部分地方我们都可以使用内置的函数式接口。来看看四大内置接口及其使用方法。</p>
+<h3>Consumer:消费型接口</h3>
+<pre><code>   void accep(T t);
+</code></pre>
+<h3>Supplier:供给型接口</h3>
+<pre><code>   T get();
+</code></pre>
+<h3>Function:函数型接口</h3>
+<pre><code>   R apply(T t);
+</code></pre>
+<h3>Predicate:断言型接口</h3>
+<pre><code>   boolean Test（T t）；
+</code></pre>
+<pre><code>List&lt;Integer&gt; numlist = getNumList(10,()-&gt; (int)Math.random()100);
+        for (Integer num:numlist) {
+            System.out.println(num);
+        }
+    }
+    public List&lt;Integer&gt; getNumList(int num, Supplier&lt;Integer&gt; sup){
+        List&lt;Integer&gt; list=new ArrayList&lt;&gt;();
+        for (int i = 0; i &lt; num; i++) {
+            Integer n = sup.get();
+            list.add(n);
+        }
+        return list;
+    }
+</code></pre>
+<pre><code>    //Function&lt;T,R&gt;:函数型接口
+    //用于处理字符串
+    public String StrHandler(String str, Function&lt;String,String&gt; fun){
+        return fun.apply(str);
+    }
+    @Test
+    public void test3(){
+        String str = StrHandler(&#34;\t\t\t 就是对快睡觉&#34;,(x)-&gt;x.trim());
+        System.out.println(str);
+        String uper = StrHandler(&#34;\t\t\t 就是对快睡觉&#34;,(x)-&gt;x.toUpperCase());
+        System.out.println(uper);
+        String newStr=StrHandler(&#34;\t\t\t 就是对快睡觉&#34;,(x)-&gt;x.substring(2,5));
+        System.out.println(newStr);
+    }
+</code></pre>
+<pre><code>    //Predicate&lt;T&gt;:断言型接口
+    //将满足条件的字符串放入集合中
+    public List&lt;String&gt; FilterStr(List&lt;String&gt; list, Predicate&lt;String&gt; pre){
+        List&lt;String&gt; strList = new ArrayList&lt;&gt;();
+        for (String str:list) {
+            if (pre.test(str)){
+                strList.add(str);
+            }
+        }
+        return strList;
+    }
+    @Test
+    public void test4(){
+        List&lt;String&gt; list = Arrays.asList(&#34;aaa&#34;,&#34;bbb&#34;,&#34;ccc&#34;,&#34;bbbb&#34;,&#34;jahdgja&#34;);
+        List&lt;String&gt; strList = FilterStr(list,s -&gt; s.length()&gt;3);
+        for (String str:strList) {
+            System.out.println(str);
+        }
+    }
+</code></pre>
+<h2>使用&#34;::&#34;方法引用</h2>
+<h3>方法引用：若Lambda 体中的内容有方法已经实现了，我们可以使用&#34;方法引用&#34;（可以理解为方法引用是Lambda表达式的另外一种表现形式）</h3>
+<p>主要有三种语法格式：<br><br>① 对象::实例方法名<br><br>② 类::静态方法名<br><br>③ 类::实例方法名<br><br>注意：Lambda 体中调用方法的参数列表和返回值类型要与函数式接口中抽象方法的参数列表的返回值一致。若Lambda 参数列表中的第一个参数是实例方法的调用者，而第二个参数是实例方法的参数时，可以使用ClassNane::nethod</p>
+<h3>构造器引用</h3>
+<p>格式：ClassName::new<br><br>注意：需要调用的构造器的参数列表要与函数式接口中抽象方法的参数列表保持一致！</p>
+<h3>数组引用</h3>
+<p>Type::new</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Stream API" duration="0">
+        <p>Duration： 20：00</p>
+<h2>简介</h2>
+<p>  Java8中有两大最为重要的改变。第-一个是Lambda表达式;另外一个则是Stream API(java. util. stream. *)。<br><br>  Stream是Java8中处理集合的关键抽象概念，它可以指定你希望对集合进行的操作，可以执行非常复杂的查找、过滤和映射数据等操作。使用Stream API对集合数据进行操作，就类似于使用SQL 执行的数据库查询。也可以使用Stream API来并行执行操作。简而言之，StreamAPI提供了一种高效且易于使用的处理数据的方式。说实话，Stream学起来要比Lambda表达式简单多了，毕竟这只是API。</p>
+<h2>创建Stream</h2>
+<p>创建Stream其实就几种，我直接上代码吧。</p>
+<pre><code>public void test1(){
+        //1.可以通过Collection系列集合提供的stream()或parallelStream()
+        List&lt;String&gt; list=new ArrayList&lt;&gt;();
+        Stream&lt;String&gt; stream1 = list.stream();
+        //2.通过Arrays中的静态方法stream()获取数组流
+        Staff[] staffs = new Staff[10];
+        Stream&lt;Staff&gt; stream2 = Arrays.stream(staffs);
+        //3.通过Steam类中的静态方法of()
+        Stream&lt;String&gt; stream3 = Stream.of(&#34;aaa&#34;,&#34;bbb&#34;,&#34;ccc&#34;);
+        //4.创建无限流
+        //迭代
+        Stream&lt;Integer&gt; stream4 = Stream.iterate(0,(x)-&gt;x+2);
+        stream4.forEach(System.out::println);
+        //生成
+        Stream.generate(()-&gt;Math.random());
+    }
+</code></pre>
+<h2>Stream的使用</h2>
+<p>  Stream的作用主要就是对数据的操作，了解了他下面的一些方法之后用起来就很方便。其中重要的有以下几个：<br><br>（1） forEach：Stream 提供了新的方法 ‘forEach&#39; 来迭代流中的每个数据。<br><br>（2） map：map 方法用于映射每个元素到对应的结果。<br><br>（3） filter：filter 方法用于通过设置的条件过滤出元素。<br><br>（4） limit：limit 方法用于获取指定数量的流。<br><br>（5） sorted：sorted 方法用于对流进行排序。<br><br>（6） 并行（parallel）程序：parallelStream 是流并行处理程序的代替方法。<br><br>（7） Collectors：Collectors 类实现了很多归约操作，例如将流转换成集合和聚合元素。Collectors 可用于返回列表或字符串。<br><br>（8） 另外，一些产生统计结果的收集器也非常有用。它们主要用于int、double、long等基本类型上。如：getMax()、getMin()、getSum()、getAverage()等等。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>Duration： 1：00<br>  总的来说java8新特性的难点还是在Lambda表达式上，并且这也是重点。因此，我建议在学习java8新特性时应该在Lambda表达式上多下功夫，这是一个全新的编程方式，因此会出现很多错误。起初需要很细心才能慢慢学好。不得不承认Java8的魅力确实很大。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

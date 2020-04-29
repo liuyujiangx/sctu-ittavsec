@@ -1,15 +1,14 @@
 {
   "environment": "web",
+  "source": "md文件/20200210-01-刘玉江.md",
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-49880327-14",
-  "updated": "2020-02-10T20:00:25+08:00",
+  "updated": "2020-02-10T20:00:26+08:00",
   "id": "20200210-01-刘玉江",
   "duration": 1,
   "title": "案例库环境配置",
-  "authors": "刘玉江",
   "summary": "demo",
-  "source": "20200210-01-刘玉江.md",
   "theme": "",
   "status": [
     "published"

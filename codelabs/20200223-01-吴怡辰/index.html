@@ -1,0 +1,141 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>上下滚动页面实现</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="上下滚动页面实现"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="案例描述" duration="0">
+        <p>小程序中，页面的呈现方式非常多样，要使页面不只是单一的一个页面，而要实现在当前页面的自由上下滚动，且上下滚动呈现出每个不同滚动页面的形式，该怎样实现呢？</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="效果图" duration="0">
+        <p><img src="img/d2f942bc59232f59.jpg"><img src="img/5c386c25ade39d1f.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="实现步骤" duration="0">
+        <h2>wxml页面实现</h2>
+<p>将每一个不同的页面进行单独且相似的wxml代码编写，每个页面放入一个整体的view中，设置bind事件绑定，scroll组件实现滚动事件。scrollTouchStart——滚动页面起始，scrollTouchEnd——滚动页面结束，scrollTouchMove——滚动的过程。代码如下：</p>
+<pre><code>&lt;view id=&#39;hook1&#39; class=&#34;section section01 &#123;&#123;scrollindex==0?&#39;active&#39;:&#39;&#39;}}&#34; style=&#39;background:lightyellow&#39; bindtouchstart=&#34;scrollTouchStart&#34; bindtouchmove=&#39;scrollTouchMove&#39; bindtouchend=&#34;scrollTouchEnd&#34;&gt;
+  &lt;view class=&#39;cont&#39;&gt;
+    &lt;view class=&#39;cont-body&#39;&gt;
+      &lt;view&gt;
+      &lt;image class=&#34;pic&#34; src=&#34;/images/img1.jpg&#34;&gt;&lt;/image&gt;
+      &lt;/view&gt;
+      &lt;view&gt;&#34;愿生活里有热汤和甜食，背包里有书籍和纸笔。书里故事如迷宫，迷宫通向海。沟通使误解消除，人自充满善意。走很远的路回家，混沌中生活出新的自己。💪&#34;
+      &lt;/view&gt;
+    &lt;/view&gt;
+  &lt;/view&gt;
+&lt;/view&gt;
+</code></pre>
+<h2>wxss配置</h2>
+<p>让每个页面呈现独立性，需要将页面设置height:100%;对每个页面设置一个position定位属性为relative，使每个页面的内容都能够在单独页面呈现。代码如下：</p>
+<pre><code>.scroll-fullpage {
+  height: 100%;
+}
+.section {
+  height: 100%;
+}
+.cont {
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.cont-body {
+  width: 75%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.pic{
+   height: 130rpx;
+   width: 130rpx;
+   border-radius: 50%
+}
+</code></pre>
+<h2>js配置</h2>
+<p>date数据的配置和scrollTouchStart、scrollTouchMove、scrollTouchEnd三个事件函数进行配置。<br>代码如下：</p>
+<pre><code>  data: {
+    scrollindex: 0, 
+    totalnum: 4,
+    starty: 0, 
+    startTime: 0,
+    endy: 0, 
+    endTime: 0,
+    critical: 80, 
+    maxTimeCritical: 300, 
+    minTimeCritical: 100, 
+    margintop: 0,
+    currentTarget: null,
+  },
+</code></pre>
+<pre><code> scrollTouchStart: function (e) {
+    let py = e.touches[0].pageY,
+      stamp = e.timeStamp,
+      currentTarget = e.currentTarget.id;
+    console.log(py);
+    this.setData({
+      starty: py,
+      startTime: stamp,
+      currentTarget: currentTarget
+    })
+  },
+  scrollTouchMove(e) {
+    // console.log(e);
+  },
+  scrollTouchEnd: function (e) {
+    let py = e.changedTouches[0].pageY,
+      stamp = e.timeStamp,
+      d = this.data,
+      timeStampdiffer = stamp - d.startTime;
+    this.setData({
+      endy: py,
+      endTime: stamp
+    })
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>在配置一个滚动页面时，注意对页面整体性和每个滚动页面独立性的实现。注意绑定事件，调用scroll组件。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>基础图文排版</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="基础图文排版"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="问题描述" duration="0">
+        <p>图文排版有多种形式，接下来介绍两种最基础类型的图文排版：左图右字和上图下字。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="左图右字" duration="0">
+        <h2>效果图</h2>
+<p><img src="img/b4dcd56f3fd9b844.jpg"><br>图文组合时，要让左边是图，右边是文字描述，需要将图片image标签和文字标签（注：此时使用view标签）放进同一个view标签里面,再对wxss进行配置。</p>
+<h2>wxml代码如下：</h2>
+<pre><code>&lt;view class=&#34;v1&#34;&gt;电影列表&lt;/view&gt;
+  &lt;view&gt;
+    &lt;image class=&#34;p1&#34; src=&#34;/pages/image/timg.jpg&#34;&gt;&lt;/image&gt;
+    &lt;view class=&#34;t1&#34;&gt;电影1:相关描述&lt;/view&gt;
+  &lt;/view&gt;
+  &lt;view&gt;
+    &lt;image class=&#34;p2&#34; src=&#34;/pages/image/timg.jpg&#34;&gt;&lt;/image&gt;
+    &lt;view class=&#34;t2&#34;&gt;电影2：相关描述&lt;/view&gt;
+  &lt;/view&gt;
+    &lt;view&gt;
+    &lt;image class=&#34;p2&#34; src=&#34;/pages/image/timg.jpg&#34;&gt;&lt;/image&gt;
+    &lt;view class=&#34;t2&#34;&gt;电影3：相关描述&lt;/view&gt;
+  &lt;/view&gt;
+
+</code></pre>
+<h2>wxss代码如下：</h2>
+<pre><code>.p1{
+  margin: 5px 10px;
+  height: 80px;
+  width: 80px;
+}
+
+.t1{
+  margin-right: 220rpx;
+  margin-top: 80rpx;
+  float: right
+}
+
+.p2{
+  margin: 5px 10px;
+  height: 80px;
+  width: 80px;
+}
+
+.t2{
+  margin-right: 200rpx;
+  margin-top: 80rpx;
+  float: right
+}
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="上图下字" duration="0">
+        <h2>效果图</h2>
+<p><img src="img/8eba6db07250987f.jpg"><br>上图下字与左图右字的wxml配置方法类似，都是放入同一个view中再进行配置，重点是在wxss中的不同。</p>
+<h2>wxml代码：</h2>
+<pre><code>&lt;view&gt;
+  &lt;view class=&#34;v1&#34;&gt;
+    &lt;navigator url=&#34;/pages/change/change&#34;&gt;
+     &lt;image class=&#34;touxiang&#34; src=&#34;/images/touxiang.jpg&#34;&gt;&lt;/image&gt;
+    &lt;/navigator&gt;
+  &lt;/view&gt;
+  &lt;view class=&#34;v1&#34;&gt;
+   &lt;text&gt;WYC&lt;/text&gt;
+  &lt;/view&gt;
+&lt;/view&gt;
+&lt;view class=&#34;partitionLine&#34;&gt;&lt;/view&gt;
+</code></pre>
+<h2>wxss中的代码：</h2>
+<pre><code>.v1{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.touxiang{
+  margin: 50rpx;
+  height: 200rpx;
+  width: 200rpx;
+  border-radius: 50%;
+}
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>无论是哪种图文排版形式，最重要的就是将图片和文字放入同一个view标签中，再在wxss中调整不同的位置和大小。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

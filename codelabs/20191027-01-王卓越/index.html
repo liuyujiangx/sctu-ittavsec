@@ -1,0 +1,62 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>在图片中创建坐标链接以及 
+用法</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="在图片中创建坐标链接以及 
+用法"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="案例描述" duration="0">
+        <p>在链接中，常常出现坐标的问题，不明白坐标中的与之间的联系，以及的用法;元素的用来添加视频，再次过程中出现的视频不能播放以及暂停等等所涉及的标签与元素都需要我们去解决。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="问题分析" duration="0">
+        <h2>视频的播放问题以及所涉及的相应标签与元素</h2>
+<p>我们所遇见的问题多属于对相应的标签不熟练，以及对相应的元素不熟练所导致的，在我们对视频无法播放时应注意以下元素：<br>audio定义音频的标签<br>video定义视频的标签<br>controls该属性为显示音频控件（比如播放，暂停）<br>loop该属性为音频结束时重新播放。<br>muted该属性为音频静音播放。<br>preload该属性为网页打开时音频默认被加载。</p>
+<h2>图片中的超级链接</h2>
+<p>对于图片中的链接则是利用了img 元素中的 &#34;usemap&#34; 属性引用 map 元素中的 &#34;id&#34; 或 &#34;name&#34; 属性（根据浏览器），所以我们同时向 map 元素添加了 &#34;id&#34; 和 &#34;name&#34; 属性；<br>此处我们需要注意的时coords的属性以及coords与shape的关系：<br>  首先coords属性为定义坐标，该图中我利用了属性来定图片中可以点击的区域，利用shape来定义可点击区域的形状，一般shape与coords关系有：<br>1.rect：矩形（定义矩形coords常常有x1，y1，x2，y2两个坐标.x1与y1表示一个角的坐标，x2，y2表示那个角对角的坐标；图中x1=400，y1=320，x2=580，y2=0）<br>2.circle：圆形（定义圆形coords常常有x，y，r，一个坐标，x，y代表的时圆心的坐标，r代表圆的半径大小。）<br>3.polygon：多边形（定义多边形coords与矩形类似，但最少都有三个坐标：即为三角形，其余多边形几个角就有几个坐标，即每个坐标代表一个角。）</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="解决问题" duration="0">
+        <p>对于以上问题我们可以通过相应的标签及元素的属性解决，对于视频无法播放的问题，是忘了添加controls，导致无法显示音频控件。视频居中问题则是利用了</p>
+<p>标签，将标签放入</p>
+<p>标签中，我最开始使用的是</p>
+<p>,以及直接使用不能使视频居中。<br>图片链接中的问题则是将shape与coords的关系混淆了，导致坐标一直不对，从而无法将图片中的区域与坐标链接对应起来。&lt;/p&gt;<br><br>&lt;h2&gt;总结&lt;/h2&gt;<br><br>&lt;p&gt;对于此遇到的问题，主要是对图片链接的问题，我觉得类似与css的格式，来在图片中坐标区域创造一个链接。对于视频则是要对有关元素的属性掌握，采用相对路径的方式来加入视频。&lt;/p&gt;<br></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

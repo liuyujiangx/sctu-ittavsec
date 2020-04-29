@@ -1,0 +1,78 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>微信小程序中的轮播图</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="微信小程序中的轮播图"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="1 什么是轮播图拉菜单的运用" duration="0">
+        <p>轮播图通俗的说就是在一个模块或者说窗口，通过电脑上鼠标点击、手机上手指滑动后，可以看到多张图片。轮播图的位置一般放置在页面首部，具有内容醒目、重点突出等特点。轮播图在一般的页面中常用于特色推荐，如淘宝网上轮播图中的都是特价商品以及其他一些好物推荐。轮播图在使用过程中，最重要的一个特点就是实时更新。小程序中的轮播图也大致具有以上特点。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="2 小程序中的标签" duration="0">
+        <p>微信小程序的制作与HTML前端制作是类似的，制作流程也极度相似，依旧是框架编写，样式修改，功能设置。但是微信小程序与HTML的标签是完全不一样的，微信小程序有自己的编写标签。轮播图编写过程中，我们经常会用到的标签是、、 、、。其中比较重要的就是Swiper标签，它是一个滑块容器类组件，提供如下的一些属性。<br><img src="img/1a55d1cd33605926.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="3 轮播图的制作" duration="0">
+        <p>在了解上述基础知识，结合我们已经学习的HTML知识就可以开始轮播图的制作了。　Swiper滑块组件代码，具有indicator-dots，autoplay，interval，duration四个属性。indicator-dots：是否显示面板指示点（默认值false）、autoplay：是否自动切换（默认值false）、interval：自动切换时间间隔(默认值5000)、duration：滑动动画时长（默认值500）。<br> .wxml文件的代码如下：<br>&#34;&#39;<br></p>
+<pre><code>&lt;swiper class=&#39;u-wrp-bnr&#39; indicator-dots=&#39;true&#39; autoplay=&#39;true&#39; interval=&#39;5000&#39; duration=&#39;1000&#39; circular=&#39;true&#39;&gt;
+  &lt;block wx:for=&#34;&#123;&#123;movies}}&#34; wx:for-index=&#34;index&#34;&gt;
+    &lt;swiper-item&gt;
+      &lt;image src=&#39;&#123;&#123;item.url}}&#39; class=&#39;u-img-slide&#39; mode=&#39;aspectFill&#39;&gt;&lt;/image&gt;
+    &lt;/swiper-item&gt;
+  &lt;/block&gt;
+&lt;/swiper&gt;
+</code></pre>
+<p><br>&#34;&#39;<br>在.wxss文件中，我们只需要对相关标签设置一定的属性就行。因为本次我们制作的是轮播图，所以相关数值就只有图片。在.js文件中，对movies的值进行赋值。</p>
+<pre><code>Page({
+  data: {
+inputValue: &#39;&#39;, //搜索的内容
+    //轮播图
+    movies: [
+      { url: &#39;../../images/s1.jpg&#39; },
+      { url: &#39;../../images/s2.jpg&#39; },
+      { url: &#39;../../images/s3.jpg&#39; },
+      { url: &#39;../../images/s4.jpg&#39; }
+    ],
+}
+}]
+</code></pre>
+<p>效果图如下（截图不完整）:</p>
+<p><img src="img/46d3b3aad8a3fcfd.png"></p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

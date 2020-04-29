@@ -1,0 +1,22 @@
+{
+  "environment": "web",
+  "source": "md文件/20200210-01-黄晓锋.md",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-02-12T21:55:24+08:00",
+  "id": "20200210-01-黄晓锋",
+  "duration": 0,
+  "title": "maven在compile编译时出错",
+  "summary": "demo",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "java"
+  ],
+  "tags": [],
+  "feedback": "http://www.sctu.edu.cn",
+  "url": "20200210-01-黄晓锋"
+}

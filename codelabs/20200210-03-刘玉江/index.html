@@ -21,9 +21,7 @@
 </head>
 <body>
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
-  <google-codelab codelab-gaid=""
-                  id="20200210-03-刘玉江"
-                  title="如何将MySQL完全卸载"
+  <google-codelab title="如何将MySQL完全卸载"
                   environment="web"
                   feedback-link="http://www.sctu.edu.cn">
     
@@ -34,16 +32,16 @@
       </google-codelab-step>
     
       <google-codelab-step label="步骤" duration="0">
-        <h2 is-upgraded>1</h2>
+        <h2>1</h2>
 <p>使用快捷键win+r然后搜索services.msc，将SQL服务停止掉。</p>
-<p class="image-container"><img src="img\a07c87c27078968b.png"></p>
-<p class="image-container"><img src="img\5ed4421b84ef1c30.png"></p>
-<h2 is-upgraded>2</h2>
+<p><img src="img/a07c87c27078968b.png"></p>
+<p><img src="img/5ed4421b84ef1c30.png"></p>
+<h2>2</h2>
 <p>打开控制面板：控制面板\程序\程序和功能，将MySQLserver卸载掉。</p>
-<h2 is-upgraded>3</h2>
-<p>再去文件夹去删除掉MySQL的文件夹：Program Files\MySQL，和ProgramData\MySQL。ProgramData文件夹是隐藏文件夹，我们要先开启查看隐藏的项目。如果删不掉可以使用文件粉碎功能<br><img src="img\b6465ff18c2e9e50.png"></p>
-<h2 is-upgraded>4</h2>
-<p>最后我们再打开注册表，还是win+r然后输入regedit。<br> <img src="img\420b4d2ec4e8fb6d.png"><br> 找到MySQL文件然后删除。<br><code>HKEY\_LOCAL\_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Application\MySQL文件夹</code></p>
+<h2>3</h2>
+<p>再去文件夹去删除掉MySQL的文件夹：Program Files\MySQL，和ProgramData\MySQL。ProgramData文件夹是隐藏文件夹，我们要先开启查看隐藏的项目。如果删不掉可以使用文件粉碎功能<br><img src="img/b6465ff18c2e9e50.png"></p>
+<h2>4</h2>
+<p>最后我们再打开注册表，还是win+r然后输入regedit。<br> <img src="img/420b4d2ec4e8fb6d.png"><br> 找到MySQL文件然后删除。<br><code>HKEY\_LOCAL\_MACHINE\SYSTEM\ControlSet001\Services\Eventlog\Application\MySQL文件夹</code></p>
 <p><code>HKEY\_LOCAL\_MACHINE\SYSTEM\ControlSet002\Services\Eventlog\Application\MySQL文件夹。</code></p>
 <p><code>HKEY\_LOCAL\_MACHINE\SYSTEM\CurrentControlSet\Services\Eventlog\Application\MySQL的文件夹。</code></p>
 <p>如果没有相应的文件夹，就不需要删除。或者也可以使用查找功能，将与mysql相关的都删除掉。</p>

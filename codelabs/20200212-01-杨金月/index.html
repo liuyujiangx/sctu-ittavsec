@@ -1,0 +1,96 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>背景图片的充满</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="背景图片的充满"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="方法一：CSS直接定义body背景图：" duration="0">
+        <p>代码：</p>
+<pre><code>body{
+background:url(img/bg.jpg)  
+no-repeat center center;
+    background-size:cover;
+    background-attachment:fixed;
+    background-color:#CCCCCC;
+}
+</code></pre>
+<p>background-image：url（）：css定义加载body的背景图；<br><br>background-position: center center：背景图垂直、水平均居中；<br><br>background-repeat: no-repeat：背景图不平铺；<br><br>background-attachment: fixed：当内容高度大于图片高度时，背景图像的位置相对于viewport固定(此条属性必须设置否则可能无效)；<br>background-size: cover：让背景图基于容器大小伸缩；<br><br>background-color: #CCCCCC：设置背景颜色，背景图加载过程中会显示背景色。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="方法二：CSS间接定义背景图" duration="0">
+        <p>代码：</p>
+<pre><code>html,body{
+                width: 100%;
+                height: 100%;
+}
+.mui-content{
+                background: url(img/bg.jpg) bottom center no-repeat #efeff4 ;
+                background-size: 100% 100%;
+                width: 100%;
+                height: 100%;
+}
+
+</code></pre>
+<p>运用background-size: 100% 100%;width: 100%;height: 100%;直接设置背景图片100%显示。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="方法三：HTML直接定义图片" duration="0">
+        <p>代码：</p>
+<pre><code>&lt;body&gt;
+    &lt;img width=&#34;100%&#34; height=&#34;100%&#34; src=&#34;img/bg.jpg&#34; style=&#34;position:absolute; left:0; top:0; z-index:-1;&#34;/&gt;
+&lt;/body&gt;
+
+</code></pre>
+<p>width=&#34;100%&#34; height=&#34;100%&#34;：设置图片的显示的大小；<br><br>left:0; top:0;：把图片相对于浏览器决定定位；<br><br>z-index:-1;&#34;：把层级设为-1之后就其他元素就显示在它上面了，相当于将图片设为了背景图片。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="方法四：JSP图片自适应" duration="0">
+        <p>```css<br>body{</p>
+<pre><code> background-image:url(image/beijing3.jpg); 
+ background-origin:content; 
+ background-position:50% 50%;
+ background-size:contain; 
+ background-size:cover;
+ background-repeat:no-repeat;  
+</code></pre>
+<p>}<br>````<br>background-origin:content：从content区域开始显示背景；<br><br>background-position:50% 50%：图片上下左右居中；<br><br>background-size:contain：保持图像本身的宽高比例，将图片缩放到宽度或高度正好适应定义背景的区域；<br><br>background-size:cover：覆盖填充，将图片缩放到宽度或高度正好适应定义背景的区域；<br><br>background-repeat:no-repeat：图像不重复显示。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

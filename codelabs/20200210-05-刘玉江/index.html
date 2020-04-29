@@ -21,9 +21,7 @@
 </head>
 <body>
   <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
-  <google-codelab codelab-gaid=""
-                  id="20200210-05-刘玉江"
-                  title="Flask之模板继承"
+  <google-codelab title="Flask之模板继承"
                   environment="web"
                   feedback-link="http://www.sctu.edu.cn">
     
@@ -71,7 +69,7 @@
 
 </code></pre>
 <p>效果如下：</p>
-<p class="image-container"><img alt="效果图" src="img\59a5041c0b612283.png"></p>
+<p><img alt="效果图" src="img/59a5041c0b612283.png"></p>
 <p>这里 <code>{% extends %}</code> 标记是关键，它告诉模板引擎这个模板&#34;扩展&#34;了另一个模板， 当模板系统评估这个模板时会先找到父模板。这个扩展标记必须是模板中的第一个标记。 如果要使用父模板中的块内容，就要使用<br><code>&#123;&#123; super() }}</code> 。</p>
 
 

@@ -1,0 +1,126 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>50行python代码拯救&#34;懒癌&#34;</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="50行python代码拯救&#34;懒癌&#34;"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="奇妙的工具" duration="0">
+        <p>刚刚开始学python的时候，老师就说现代技术的发展最终目的就是为了方便，说白了，就是大家都&#34;懒&#34;， 懒得什么事情都亲力亲为，如果有工具能帮助我们做事，岂不妙哉？</p>
+<p><img src="img/61ac68670c662718.png"></p>
+<p>而现代文明的产物——电脑，就可以替代我们人做很多事情。而在众多的编程语言中，尤其不能放过Python这个小妖精！<br>纵观四海，笔者终于找到了一组可以直接利用微信控制电脑关机的代码！（为啥我自己写不出来呢？因为‘程序设计，菜是原罪&#39;🐶）</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="用到的库" duration="0">
+        <h2>利用cmd，下载3个第三方库：itchat、opencv、matplotlib</h2>
+<p>下载命令：pip install + 库名</p>
+<p><img src="img/5926f2ce3da404ed.png"></p>
+<p>用同样的方式下载其他的库。用pip list检查第三方库是否安装成功。</p>
+<p><img src="img/902a129e7d9b054b.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="全部代码" duration="0">
+        <pre><code>#作者：痴海
+#链接：https://zhuanlan.zhihu.com/p/47676417
+#来源：知乎
+#著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+
+import itchat
+import os
+import time
+import cv2
+
+sendMsg = u&#34;{消息助手}：暂时无法回复&#34;
+usageMsg = u&#34;使用方法：\n1.运行CMD命令：cmd xxx (xxx为命令)\n&#34; \
+           u&#34;-例如关机命令:\ncmd shutdown -s -t 0 \n&#34; \
+           u&#34;2.获取当前电脑用户：cap\n3.启用消息助手(默认关闭)：ast\n&#34; \
+           u&#34;4.关闭消息助手：astc&#34;
+flag = 0 #消息助手开关
+nowTime = time.localtime()
+filename = str(nowTime.tm_mday)+str(nowTime.tm_hour)+str(nowTime.tm_min)+str(nowTime.tm_sec)+&#34;.txt&#34;
+myfile = open(filename, &#39;w&#39;)
+
+@itchat.msg_register(&#39;Text&#39;)
+def text_reply(msg):
+    global flag
+    message = msg[&#39;Text&#39;]
+    fromName = msg[&#39;FromUserName&#39;]
+    toName = msg[&#39;ToUserName&#39;]
+
+    if toName == &#34;filehelper&#34;:
+        if message == &#34;cap&#34;:
+            cap = cv2.VideoCapture(0)
+            ret, img = cap.read()
+            cv2.imwrite(&#34;weixinTemp.jpg&#34;, img)
+            itchat.send(&#39;@img@%s&#39;%u&#39;weixinTemp.jpg&#39;, &#39;filehelper&#39;)
+            cap.release()
+        if message[0:3] == &#34;cmd&#34;:
+            os.system(message.strip(message[0:4]))
+        if message == &#34;ast&#34;:
+            flag = 1
+            itchat.send(&#34;消息助手已开启&#34;, &#34;filehelper&#34;)
+        if message == &#34;astc&#34;:
+            flag = 0
+            itchat.send(&#34;消息助手已关闭&#34;, &#34;filehelper&#34;)
+    elif flag == 1:
+        itchat.send(sendMsg, fromName)
+        myfile.write(message)
+        myfile.write(&#34;\n&#34;)
+        myfile.flush()
+
+if __name__ == &#39;__main__&#39;:
+    itchat.auto_login()
+    itchat.send(usageMsg, &#34;filehelper&#34;)
+    itchat.run()
+
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="运行效果" duration="0">
+        <p>点击F5运行，会出现一个微信登录的验证二维码</p>
+<p><img src="img/238cb1cedb50aac3.png"></p>
+<p>用微信扫描，登录即可。</p>
+<p><img src="img/a7c16026e9dfbd2a.png"></p>
+<p><img src="img/bf98447449d7a2b4.png"></p>
+<p>随后，微信文件助手就会发送这样的对话框</p>
+<p>之后就可以实现远程操作辣！！比如当你选择了&#34;睡眠模式&#34;，但是过了一段时间你要睡觉了，不用电脑需要关机的时候，你就可以用微信实现远程操作了！</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "environment": "web",
+  "source": "md文件/20200210-01-饶龙江.md",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-02-10T20:00:16+08:00",
+  "id": "20200210-01-饶龙江",
+  "duration": 41,
+  "title": "燃气火焰检测主要步骤讲解",
+  "summary": "demo",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "python"
+  ],
+  "tags": [
+    "sctu-ai"
+  ],
+  "feedback": "http://www.sctu.edu.cn",
+  "url": "20200210-01-饶龙江"
+}

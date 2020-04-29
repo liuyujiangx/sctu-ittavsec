@@ -1,0 +1,68 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>拖动悬浮窗</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="拖动悬浮窗"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="案例描述" duration="0">
+        <p>不管是小程序还是软件网页等，页面上的悬浮窗总是能够引起我们的注意，而一个悬浮窗的实现，在微信小程序开发的官方文档中，可将其理解为一个可移动视图容器，那么该使用什么组件来实现这样一个功能呢？</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="效果图" duration="0">
+        <p><img src="img/3c7bc4baea4f8132.jpg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="实现步骤" duration="0">
+        <p>一个可移动视图容器的实现只需要调用官方文档的一个movable-view组件，然后再对wxml进行简单的配置即可实现。</p>
+<h2>需要了解的是：</h2>
+<p>movable-view的direction属性支持以下四个值：<br>all - 任意方向拖动<br>vertical - 纵向拖动<br>horizontal - 横向拖动<br>none - 不能拖动<br>tips：如果direction设置为最后这个none，则只能依靠设置x,y属性值来为它进行在movable-area中的定位。<br>代码如下：</p>
+<pre><code>&lt;movable-area style=&#34;pointer-events: none;height: 100%;width: 100%;position:absolute;left:0px;top:0px;background: lightblue;&#34;&gt;
+    &lt;movable-view direction=&#34;all&#34; style=&#34;pointer-events: auto;height: 50px; width: 50px; background: pink;border-radius: 50%;&#34;&gt;
+        &lt;image src=&#39;../images/icon_component_HL.png&#39; class=&#34;imgStyle&#34;&gt;&lt;/image&gt;
+    &lt;/movable-view&gt;
+&lt;/movable-area&gt;
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="总结" duration="0">
+        <p>我们总是在软件或者网页中，看到可自由移动的悬浮窗，而通常是一个不需要拖动的悬浮窗，甚至无法拖动的悬浮窗，后续将继续深入学习这个过程的实现。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

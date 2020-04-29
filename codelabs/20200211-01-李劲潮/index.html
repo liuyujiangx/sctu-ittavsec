@@ -1,0 +1,101 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>数据科学岗位的一道基础笔试题</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="数据科学岗位的一道基础笔试题"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="案例介绍" duration="0">
+        <p>前些时日，在玩手机的时候，偶然看到了一个博主的推文。文章的题目中，提到了&#34;竟然连SQL都不会&#34;。由于这段时间在学习数据库，所以对于SQL等字眼特别敏感。所以，对于这篇文章，我自然要读一读。<br>文章中讲到的其他方面这里不再过多的赘述。我从里面copy出了一道求职相关岗位时，会遇到的一道基础笔试题。我将在本例中对该题进行详细的解答。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="问题描述" duration="0">
+        <p>这里有一个成绩信息表info_table，每条记录是学生的某科目成绩信息，包括学生学号stu_num、科目名称sub_name、学生的该科目分数score等字段，请你写个SQL取一下每个科目分数前三的学生信息。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="解题准备过程" duration="0">
+        <p>相信大家都已读了题目，为了方便大家的理解以及接下来对相应SQL语句的验证，我们这里使用SQL Server Studio进行演示。</p>
+<h2>首先，我们先按照题目建库建表。</h2>
+<pre><code>create database course;
+use course;
+create table info_table(
+    stu_num char(20) primary key,
+    stu_name char(10),
+    score int check(score between 0 and 100)    
+)
+</code></pre>
+<p><img alt="数据库及表" src="img/a813fa9dca12abf8.png"></p>
+<h2>插入数据</h2>
+<p>为了后续的验证的方便，这里就再向该表中插入数据。三个科目（Math、English、PE），学生5人（001-005）。这里需要注意的是，因为PRIMARY KEY 约束 ‘PK<strong>info_tab</strong>89C2F6B20425A276&#39;，所以在第一列sub_num就不能出现重复。这里我们将键PK<strong>info_tab</strong>89C2F6B20425A276直接删除就好。</p>
+<h2>数据插好后的表如下：</h2>
+<p><img alt="info_table表的所有数据" src="img/13b67519bce085d4.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="解题过程" duration="0">
+        <p>准备工作就绪，现在就正式开始查询。在查询前，我们要明确三个问题:</p>
+<ul>
+<li>查什么？</li>
+<li>从哪里查？</li>
+<li>条件是什么？<br>通过题目，显然有：<strong>查的是学生信息，从info_table表中查，条件是每个科目分数第一</strong>。</li>
+</ul>
+<h2>我给出的查询如下：</h2>
+<pre><code>select * 
+from(
+    select stu_num,sub_name,score,row_number() 
+    over(
+    partition by sub_name 
+    order by score desc
+    ) 
+    as num
+    from info_table
+) 
+T where T.num &lt;= 3 
+order by sub_name
+</code></pre>
+<h2>查询结果如图：</h2>
+<p><img alt="查询结果" src="img/3865dafef73cafe4.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="结语" duration="0">
+        <p>对于SQL，基础的语法学起来很简单，简单的查询上手也很容易。难就难在如何根据具体需求去写查询，并且为了达到同一查询目的，SQL语句并不唯一，这时你是否又能选出最佳的那一个呢？俗话说的好，&#34;基础不扎实，地动山摇。&#34;对于SQL我们一定要夯实基础，再进行熟练掌握。祝你成功！</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

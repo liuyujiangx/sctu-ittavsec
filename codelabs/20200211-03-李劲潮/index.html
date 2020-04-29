@@ -1,0 +1,105 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>MUI框架 | CardView</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab title="MUI框架 | CardView"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="CardView 介绍" duration="0">
+        <p>在使用MUI开发APP的过程中，功能的融合和美观的布局，往往能使得项目得以顺利进展。不错的设计肯定离不开MUI的各个控件。对于每个控件的熟悉，并且能个灵活的运用，使得多个控件能够自由组合，和谐的互相锲合，常常可以使得写出一个页面有事半功倍的效果。</p>
+<p>在本例中，我将介绍如何使用MUI现成样式做一个卡片视图。首先，大家是否明白卡片视图是什么？我们不妨看看下面这张图。不难看出在这个页面中，有三张完整的卡片模块，其实，CardView就是若干个卡片模块的集合。在同一个CardView中的所有卡片大致主题样式应该相似，卡片内容上的布局也应该保持统一性。这两点也是约定熟成的一项要求。</p>
+<p><img alt="什么是Cardview" src="img/a65d002b0b2c6b10.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="分步实现" duration="0">
+        <p>想必，大家对CradView已经有了整体的了解。接下来，我们就开始通过代码具体实现一个CradView。万事第一步，先搭一个框架，咱们也不例外。</p>
+<h2>Card 框架</h2>
+<pre><code>    &lt;!--这是一个卡片的框架--&gt;
+    &lt;div class=&#34;mui-card&#34;&gt;
+        &lt;div class=&#34;mui-card-header&#34;&gt;
+            &lt;!--这里是卡片标题--&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;mui-card-content&#34;&gt;
+            &lt;!--这里是卡片内容--&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;mui-card-footer&#34;&gt;
+            &lt;!--这里是卡片的底部说明--&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+<p><img alt="card框架" src="img/301b533ce0745f7d.png"></p>
+<h2>填充内容</h2>
+<p>为了更加清楚的表现出Card模块的各个部分的用途，咱们分别来向这个Crad框架里填充一些内容。首先，我们向content里加入一张展示用的图片。</p>
+<pre><code>    &lt;div class=&#34;mui-card-content&#34;&gt;
+        &lt;!--这里是卡片内容--&gt;
+        &lt;img src=&#34;img/IMG_0512.JPG&#34; width=&#34;400px&#34; height=&#34;200px&#34;/&gt;
+    &lt;/div&gt;
+</code></pre>
+<p>这样我们就得到了一张发帖所展示的封面图。效果如下：</p>
+<p><img alt="封面图展示效果" src="img/96407d9db6951ace.png"></p>
+<h2>完善</h2>
+<ul>
+<li>常见的card的布局，会在header块里展示作者及头像等信息。我们同样，也对我们的header进行完善。</li>
+</ul>
+<pre><code>    &lt;div class=&#34;mui-card-header&#34;&gt;
+        &lt;!--这里是卡片标题--&gt;
+            &lt;img src=&#34;img/背景图.jpg&#34;/ style=&#34;float: left;&#34;&gt;
+            &lt;p style=&#34;padding-right: 210px; padding-top: 5px;&#34;&gt;自由的飞翔&lt;/p&gt;
+    &lt;/div&gt;
+</code></pre>
+<p><img alt="完善发表人信息后" src="img/9ba571bbf504d569.png"></p>
+<ul>
+<li>此时，我们的发帖人信息已经做好了完善。紧接着，我们将底部完善好，填充进去发表时间。这样一个卡片就做好了。</li>
+</ul>
+<pre><code>    &lt;div class=&#34;mui-card-footer&#34; style=&#34;height: 30px;&#34;&gt;
+        &lt;!--这里是卡片的底部说明--&gt;
+        &lt;div class=&#34;mui-media-body&#34; style=&#34;padding-top: 10px;&#34;&gt;
+            &lt;p&gt;2019年10月25日 17:20&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+</code></pre>
+<p><img alt="完善的卡片" src="img/400a2bc126fb9336.png"></p>
+<h2>形成 View</h2>
+<p>我们再多做几个卡片，一个CardView就做好了。最后的效果图如下：</p>
+<p><img alt="最终效果" src="img/858be031f2b6691f.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="结语" duration="0">
+        <p>在写页面时，熟练的自由组合各个控件，不用自己写样式，也能写出一个很好看、可以直接使用的页面。当然，对于一些细节上的修改，可以打开mui的css文件进行样式修改。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>
