@@ -1,0 +1,84 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>浅谈Cookie</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="20200210-04-刘玉江"
+                  title="浅谈Cookie"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="1 什么是Cookie" duration="0">
+        <p>Cookie，有时也用其复数形式 Cookies。类型为&#34;小型文本文件&#34;，是某些网站为了辨别用户身份，进行Session跟踪而储存在用户本地终端上的数据（通常经过加密），由用户客户端计算机暂时或永久保存的信息。就相当于我们在银行办理的银行卡，以后再去银行的时候，银行就直接能够通过银行卡辨别我们的身份。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="2 Cookie的设置与获取" duration="0">
+        <p>我们可以通过以下方式设置Cookie：</p>
+<pre><code>//通过HttpServletResponse.addCookie的方式设置Cookie：注意new Cookie()时两个参数都是字符串
+
+int number = 12;
+//如何在cookie空间定义一个变量
+
+Cookie cookie = new Cookie(&#34;number&#34;,String.valueOf(number));
+cookie.setMaxAge(60);
+response.addCookie(cookie);
+
+</code></pre>
+<p>在浏览器中可以查看到我们设置了number=12、Max-Age=60，还可以看见设置的时间</p>
+<p class="image-container"><img alt="效果图" src="img\6464a1926fc8b66.png"></p>
+<p>在这里我们设置了MaxAge，这是Cookie的有效期，单位为秒。<code>Cookie</code>中通过<code>getMaxAge()</code>和<code>setMaxAge(int maxAge)</code>来读写该属性。<code>maxAge</code>有3种值，分别为正数，负数和0。如果<code>maxAge</code>属性为正数，则表示该Cookie会在<code>maxAge</code>秒之后自动失效。浏览器会将<code>maxAge</code>为正数的Cookie持久化，即写到对应的Cookie文件中。无论客户关闭了浏览器还是电脑，只要还在maxAge秒之前，登录网站时该Cookie仍然有效。当<code>maxAge</code>属性为负数，则表示该Cookie只是一个临时Cookie，不会被持久化，仅在本浏览器窗口或者本窗口打开的子窗口中有效，关闭浏览器后该Cookie立即失效。当<code>maxAge</code>为0时，表示立即删除Cookie</p>
+<p>我们再通过以下方式获取Cookie：</p>
+<pre><code>//服务端获取客户端携带的cookie：通过HttpServletRequest获取
+
+int number = 0;
+Cookie[] cookies = request.getCookies();
+for (Cookie cookie : cookies){
+    if (cookie.getName().equals(&#34;number&#34;)){
+        number = Integer.valueOf(cookie.getValue());
+        break;
+    }
+}
+
+
+</code></pre>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="3 总结" duration="0">
+        <p>我们设置cookie用response，获取cookie用request，还有需要注意的是cookie是不能跨浏览器的。</p>
+<p>如果服务器端向客户端发送重复的Cookie那么客户端原有的Cookie会被覆盖，例如客户端第一次请求服务器端，服务器端发送的Cookie是<code>Set-Cookie:a=A</code>，第二次请求发送的Cookie是<code>Set-Cookie:a=AA</code>，那么客户端只会留下后发送的Cookie，即<code>a=AA</code>。这也是一个修改Cookie的方法。还需要将MaxAge设置为0。新建的Cookie。除了value、maxAge之外的属性，比如name、path、domain都必须与原来的一致才能达到修改或者删除的效果。否则，浏览器将视为两个不同的Cookie不予覆盖。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

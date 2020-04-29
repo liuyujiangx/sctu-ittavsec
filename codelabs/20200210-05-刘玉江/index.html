@@ -1,0 +1,88 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>Flask之模板继承</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/codelab-elements/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-49880327-14"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="20200210-05-刘玉江"
+                  title="Flask之模板继承"
+                  environment="web"
+                  feedback-link="http://www.sctu.edu.cn">
+    
+      <google-codelab-step label="1 什么是模板继承" duration="0">
+        <p>模板继承是<code>jinja2</code>里面最有力的部分了。就相当于在模板里面创建一个基础的骨架，里面的内容一般是一个网站中的常用元素，比如说网页的头部与尾部。这样下次需要用的话我们直接继承就好了。</p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="2 基础模板" duration="0">
+        <p>我们来新建一个 <code>base.html</code>，它定义了一个简单的 <code>HTML</code> 骨架，用 于显示一个简单的两栏页面。&#34;子&#34;模板的任务是用内容填充空的块：</p>
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&#34;en&#34;&gt;
+&lt;head&gt;
+    {% block head %}
+    &lt;link rel=&#34;stylesheet&#34; href=&#34;&#123;&#123; url_for(&#39;static&#39;, filename=&#39;style.css&#39;) }}&#34;&gt;
+    &lt;title&gt;{% block title %}{% endblock %} - My Webpage&lt;/title&gt;
+    {% endblock %}
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div id=&#34;content&#34;&gt;{% block content %}{% endblock %}&lt;/div&gt;
+    &lt;div id=&#34;footer&#34;&gt;
+      {% block footer %}
+      &amp;copy; Copyright 2010 by &lt;a href=&#34;http://www.baidu.com/&#34;&gt;you&lt;/a&gt;.
+      {% endblock %}
+    &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code></pre>
+<p>在这个例子中，<code>{% block %}</code>定义了几个可以被子模版填充的地方。接下来我们来写几个子模版：</p>
+<pre><code>{% extends &#34;test01.html&#34; %}
+{% block title %}Index{% endblock %}
+{% block head %}
+  &#123;&#123; super() }}
+  &lt;style type=&#34;text/css&#34;&gt;
+    .important { color: #336699; }
+  &lt;/style&gt;
+{% endblock %}
+{% block content %}
+  &lt;h1&gt;hello&lt;/h1&gt;
+  &lt;p class=&#34;important&#34;&gt;
+    欢迎您
+{% endblock %}
+
+</code></pre>
+<p>效果如下：</p>
+<p class="image-container"><img alt="效果图" src="img\59a5041c0b612283.png"></p>
+<p>这里 <code>{% extends %}</code> 标记是关键，它告诉模板引擎这个模板&#34;扩展&#34;了另一个模板， 当模板系统评估这个模板时会先找到父模板。这个扩展标记必须是模板中的第一个标记。 如果要使用父模板中的块内容，就要使用<br><code>&#123;&#123; super() }}</code> 。</p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/codelab-elements/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/prettify.js"></script>
+  <script src="https://storage.googleapis.com/codelab-elements/codelab-elements.js"></script>
+
+</body>
+</html>

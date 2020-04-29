@@ -1,0 +1,25 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-49880327-14",
+  "updated": "2020-02-10T13:37:45+08:00",
+  "id": "20200210-01-陈功锁",
+  "duration": 31,
+  "title": "下载某网站所有PPT文件",
+  "authors": "陈功锁",
+  "summary": "demo",
+  "source": "20200210-01-陈功锁.md",
+  "theme": "",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "python"
+  ],
+  "tags": [
+    "tour-data-crawler"
+  ],
+  "feedback": "http://www.sctu.edu.cn",
+  "url": "20200210-01-陈功锁"
+}
