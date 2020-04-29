@@ -148,7 +148,7 @@ gulp.task('build:html', () => {
     .pipe(gulpif(['*.html', '!index.html'], generateDirectoryIndex()))
   );
 
-  streams.push(gulp.src(`app/views/${VIEWS_FILTER}.{css,gif,jpeg,jpg,png,svg,tff}`, { base: 'app/views' })
+  streams.push(gulp.src(`app/views/${VIEWS_FILTER}/*.{css,gif,jpeg,jpg,png,svg,tff}`, { base: 'app/views' })
     .pipe(gulp.dest('build')));
 
   const otherSrcs = [
@@ -480,7 +480,7 @@ const collectMetadata = () => {
       views[view.id] = view;
     }
 
-    const codelabFiles = glob.sync(`${CODELABS_DIR}/codelab.json`);
+    const codelabFiles = glob.sync(`${CODELABS_DIR}/*/codelab.json`);
     for (let i = 0; i < codelabFiles.length; i++) {
       const codelab = parseCodelabMetadata(codelabFiles[i]);
       codelabs.push(codelab);
