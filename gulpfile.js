@@ -167,7 +167,7 @@ gulp.task('build:html', () => {
 // build:images builds all the images into the build directory.   构建:映像将所有映像构建到构建目录中。
 gulp.task('build:images', () => {
   const srcs = [
-    'app/images',
+    'app/images/**/*',
     'app/favicon.ico',
   ];
 
@@ -480,7 +480,7 @@ const collectMetadata = () => {
       views[view.id] = view;
     }
 
-    const codelabFiles = glob.sync(`${CODELABS_DIR}codelab.json`);
+    const codelabFiles = glob.sync(`${CODELABS_DIR}/codelab.json`);
     for (let i = 0; i < codelabFiles.length; i++) {
       const codelab = parseCodelabMetadata(codelabFiles[i]);
       codelabs.push(codelab);
